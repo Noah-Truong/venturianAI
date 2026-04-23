@@ -2,36 +2,36 @@
 
 import { motion, useReducedMotion, useInView } from "motion/react";
 import { useRef } from "react";
-import { AlertCircle, GitBranch, Layers, Code2 } from "lucide-react";
+import { CalendarCheck, Banknote, ShieldCheck, Eye } from "lucide-react";
 
 const features = [
   {
-    icon: AlertCircle,
-    outcome: "Your AI features stop regressing in production.",
+    icon: CalendarCheck,
+    outcome: "Zero hours of ongoing work. Earnings arrive every week.",
     description:
-      "Automated evaluation catches model quality drift before your users do. Set pass/fail thresholds, get paged when outputs degrade, and see exactly which cases broke and why.",
-    label: "Evaluation",
+      "Once your account is set up, Venturian manages every interaction with AI training pipelines on your behalf. No weekly tasks, no check-ins, no decisions to make. Whether you're in class, at the library, or asleep — you're earning.",
+    label: "Passive",
   },
   {
-    icon: GitBranch,
-    outcome: "Debug LLM failures in minutes, not days.",
+    icon: Banknote,
+    outcome: "$200–$500 deposited directly to your account each week.",
     description:
-      "Structured tracing built for call chains. Every prompt, completion, and tool call is logged with full context, token counts, and latency — searchable and filterable by run.",
-    label: "Observability",
+      "Earnings are calculated weekly and deposited directly via ACH or PayPal — your choice. Students average $200–$500 per week depending on pipeline activity. No experience or ongoing work required.",
+    label: "Weekly pay",
   },
   {
-    icon: Layers,
-    outcome: "Handle 10× traffic without rearchitecting.",
+    icon: Eye,
+    outcome: "See exactly where your money came from.",
     description:
-      "Managed inference that auto-scales and supports hot model swaps. Your team ships features; we handle capacity, routing, and failover.",
-    label: "Deployment",
+      "Your dashboard shows a line-by-line breakdown of every AI company your account supported that week, the amount earned from each, and your all-time total. No black boxes — full transparency on every dollar.",
+    label: "Transparent",
   },
   {
-    icon: Code2,
-    outcome: "Type-safe LLM responses in your existing codebase.",
+    icon: ShieldCheck,
+    outcome: "Every AI company is vetted before we accept them.",
     description:
-      "SDK with Zod-validated outputs. Define the shape you expect, and Meridian parses model responses into typed objects — with fallbacks when the output doesn't conform.",
-    label: "SDK",
+      "Venturian only works with companies that have passed our compliance review — verified business registration, data handling agreements, and responsible AI use policies. Your account is never connected to an unvetted pipeline.",
+    label: "Verified",
   },
 ];
 
@@ -56,10 +56,11 @@ export function Features() {
           className="mb-16 lg:mb-20"
         >
           <p className="font-mono text-xs tracking-widest uppercase mb-4" style={{ color: "var(--muted)" }}>
-            What you get from day one
+            Why it works
           </p>
           <h2 id="features-heading" className="text-4xl lg:text-5xl font-bold leading-tight tracking-tight" style={{ color: "var(--ink)" }}>
-            Four problems solved.<br />One platform.
+            Built around your time.
+            <br />Not your effort.
           </h2>
         </motion.div>
 

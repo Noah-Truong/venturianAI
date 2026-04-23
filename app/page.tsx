@@ -7,15 +7,18 @@ import { Features } from "@/components/sections/Features";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Team } from "@/components/sections/Team";
 import { Reviews } from "@/components/sections/Reviews";
+import { Security } from "@/components/sections/Security";
 import { CTASection } from "@/components/sections/CTASection";
+import { FAQ } from "@/components/sections/FAQ";
+import { ScrollStats } from "@/components/sections/ScrollStats";
 import { company } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Meridian AI — Infrastructure for Intelligent Systems",
+  title: "Venturian AI — Earn weekly with the future of AI.",
   description:
-    "Meridian provides the evaluation, observability, and deployment infrastructure that makes AI reliable in production. Used by scale-stage engineering teams.",
+    "Venturian connects student accounts to verified AI training pipelines. Sign up with your .edu email in 5 minutes. Then $200–$500 weekly — with nothing else required.",
   alternates: {
-    canonical: "https://meridian.ai",
+    canonical: "https://venturian.way-marketing.com",
   },
 };
 
@@ -23,8 +26,8 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: company.name,
-  url: "https://meridian.ai",
-  logo: "https://meridian.ai/logo.png",
+  url: "https://venturian.way-marketing.com",
+  logo: "https://venturian.way-marketing.com/logo.png",
   description: company.tagline,
   foundingDate: String(company.founded),
   address: {
@@ -34,9 +37,9 @@ const jsonLd = {
     addressCountry: "US",
   },
   sameAs: [
-    "https://twitter.com/meridianai",
-    "https://linkedin.com/company/meridianai",
-    "https://github.com/meridianai",
+    "https://twitter.com/venturianai",
+    "https://linkedin.com/company/venturianai",
+    "https://github.com/venturianai",
   ],
 };
 
@@ -48,13 +51,16 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Nav />
-      <main>
+      <main id="main-content">
         <Hero />
+        <ScrollStats />
         <SocialProof />
         <Features />
         <HowItWorks />
         <Team />
         <Reviews />
+        <Security />
+        <FAQ />
         <CTASection />
       </main>
       <Footer />

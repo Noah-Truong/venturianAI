@@ -3,30 +3,35 @@
 import { motion, useReducedMotion } from "motion/react";
 import Link from "next/link";
 
-const evalLines = [
-  { type: "cmd",    text: "$ meridian eval run --suite production-v2" },
-  { type: "blank",  text: "" },
-  { type: "info",   text: "  Loading 127 evaluation cases..." },
-  { type: "info",   text: "  ████████████████████ 100%" },
-  { type: "blank",  text: "" },
-  { type: "pass",   text: "  ✓  124 passed" },
-  { type: "fail",   text: "  ✗    3 regressions detected" },
-  { type: "blank",  text: "" },
-  { type: "alert",  text: "  ALERT  gpt-4o · summary model" },
-  { type: "detail", text: "         ROUGE-L  0.71 → 0.62  (−12.4%)" },
-  { type: "detail", text: "         Threshold breached at 0.65" },
-  { type: "blank",  text: "" },
-  { type: "cmd",    text: "  → Paging soren@meridianai.com" },
+const earningsLines = [
+  { type: "header", text: "Venturian · Your earnings" },
+  { type: "divider", text: "─────────────────────────────" },
+  { type: "blank", text: "" },
+  { type: "label", text: "  This week" },
+  { type: "amount", text: "  $172.80" },
+  { type: "blank", text: "" },
+  { type: "source", text: "  ✓  Helix Financial        $14.20" },
+  { type: "source", text: "  ✓  Lattice Labs           $16.40" },
+  { type: "source", text: "  ✓  Ironclad AI            $12.20" },
+  { type: "blank", text: "" },
+  { type: "divider", text: "─────────────────────────────" },
+  { type: "label", text: "  All-time total" },
+  { type: "alltime", text: "  $891.40" },
+  { type: "blank", text: "" },
+  { type: "next", text: "  Next payout: Friday, Apr 25" },
+  { type: "status", text: "  → Direct deposit confirmed" },
 ];
 
 const colorMap: Record<string, string> = {
-  cmd:    "#8ECAE6",
-  info:   "var(--muted)",
-  pass:   "#52B788",
-  fail:   "#E63946",
-  alert:  "#F4A261",
-  detail: "#9A9590",
-  blank:  "transparent",
+  header:  "var(--paper)",
+  divider: "var(--code-rule)",
+  blank:   "transparent",
+  label:   "var(--paper)",
+  amount:  "#52B788",
+  source:  "var(--paper)",
+  alltime: "var(--ink)",
+  next:    "var(--paper)",
+  status:  "var(--accent)",
 };
 
 export function Hero() {
@@ -48,7 +53,7 @@ export function Hero() {
       style={{ borderBottom: "1px solid var(--rule)" }}
       aria-labelledby="hero-heading"
     >
-      <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_440px] gap-16 lg:gap-20 items-center">
+      <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-16 lg:gap-20 items-center">
 
         {/* ── Left column ── */}
         <div>
@@ -57,7 +62,7 @@ export function Hero() {
             className="font-mono text-xs tracking-widest uppercase mb-8"
             style={{ color: "var(--muted)" }}
           >
-            AI Infrastructure · San Francisco, CA · Est. 2022
+            Venturian AI · Built by students, for students
           </motion.p>
 
           <motion.h1
@@ -66,35 +71,35 @@ export function Hero() {
             className="text-[clamp(2.75rem,6vw,5rem)] font-bold leading-[1.04] tracking-tight mb-8"
             style={{ color: "var(--ink)" }}
           >
-            AI infrastructure
+            Earn weekly
             <br />
-            that holds up
+            by supporting
             <br />
-            under real load.
+            real AI systems.
           </motion.h1>
 
           <motion.p
             {...up(0.18)}
             className="text-lg leading-relaxed mb-10"
-            style={{ color: "var(--muted)", maxWidth: "54ch" }}
+            style={{ color: "var(--muted)", maxWidth: "52ch" }}
           >
-            Meridian gives engineering teams the evaluation frameworks,
-            deployment tooling, and reliability primitives to ship AI models
-            in production — without flying blind.
+            Venturian connects student accounts to AI training pipelines.
+            Sign up with your .edu email. Setup takes 5 minutes. Verification takes 1–3 days.
+            After that, $200–$500 deposits to your bank every week — with nothing else required.
           </motion.p>
 
           <motion.div {...up(0.25)} className="flex flex-col sm:flex-row gap-3">
             <Link
-              href="#contact"
+              href="#signup"
               className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-medium transition-colors duration-150 min-h-[44px]"
               style={{ backgroundColor: "var(--ink)", color: "var(--paper)" }}
               onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.backgroundColor = "var(--accent)")}
               onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.backgroundColor = "var(--ink)")}
             >
-              Request infrastructure access <span aria-hidden="true">→</span>
+              Create your account <span aria-hidden="true">→</span>
             </Link>
             <Link
-              href="#features"
+              href="#how-it-works"
               className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-medium transition-colors duration-150 min-h-[44px]"
               style={{ border: "1px solid var(--rule)", color: "var(--ink)" }}
               onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.borderColor = "var(--ink)")}
@@ -103,9 +108,17 @@ export function Hero() {
               See how it works
             </Link>
           </motion.div>
+
+          <motion.p
+            {...up(0.32)}
+            className="mt-6 font-mono text-xs"
+            style={{ color: "var(--dim)" }}
+          >
+            .edu email required. No ongoing work. $200–$500 avg weekly via direct deposit.
+          </motion.p>
         </div>
 
-        {/* ── Right column: eval terminal ── */}
+        {/* ── Right column: earnings panel ── */}
         <motion.div
           initial={reduce ? {} : { opacity: 0, x: 28 }}
           animate={{ opacity: 1, x: 0 }}
@@ -116,9 +129,9 @@ export function Hero() {
           }}
           className="rounded-sm overflow-hidden"
           style={{ backgroundColor: "var(--code-bg)", border: "1px solid var(--code-rule)" }}
-          aria-label="Meridian AI evaluation output example"
+          aria-label="Example Venturian earnings dashboard"
         >
-          {/* Terminal chrome */}
+          {/* Panel chrome */}
           <div
             className="flex items-center gap-2 px-4 py-3"
             style={{ borderBottom: "1px solid var(--code-rule)" }}
@@ -126,19 +139,19 @@ export function Hero() {
             <span className="w-3 h-3 rounded-full bg-[#FF5F56]" aria-hidden="true" />
             <span className="w-3 h-3 rounded-full bg-[#FFBD2E]" aria-hidden="true" />
             <span className="w-3 h-3 rounded-full bg-[#27C93F]" aria-hidden="true" />
-            <span className="ml-3 font-mono text-xs" style={{ color: "#6B6560" }}>
-              meridian eval · production-v2
+            <span className="ml-3 font-mono text-xs" style={{ color: "#71717A" }}>
+              member dashboard · week of Apr 21
             </span>
           </div>
 
-          {/* Terminal output */}
+          {/* Earnings output */}
           <div className="p-5 lg:p-6">
-            {evalLines.map((line, i) => (
+            {earningsLines.map((line, i) => (
               <motion.div
                 key={i}
                 initial={reduce ? {} : { opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.35 + i * 0.018, duration: 0.15 }}
+                transition={{ delay: 0.35 + i * 0.022, duration: 0.15 }}
                 className="font-mono text-xs leading-6"
                 style={{ color: colorMap[line.type] }}
               >

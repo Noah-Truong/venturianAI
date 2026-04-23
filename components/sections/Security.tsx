@@ -28,7 +28,7 @@ const signals = [
   {
     icon: Server,
     label: "Single-tenant deployment",
-    detail: "Enterprise customers can run Meridian in an isolated VPC within their own cloud account.",
+    detail: "Data processing runs in an isolated VPC. Your account information never touches shared infrastructure.",
   },
   {
     icon: Mail,
@@ -62,13 +62,13 @@ export function Security() {
               Security
             </p>
             <h2 id="security-heading" className="text-4xl font-bold tracking-tight leading-tight mb-6" style={{ color: "var(--ink)" }}>
-              Security is infrastructure,
-              not an afterthought.
+              Your data is protected.
+              Full stop.
             </h2>
             <p className="text-sm leading-relaxed mb-8" style={{ color: "var(--muted)", maxWidth: "40ch" }}>
-              Enterprise AI teams can&apos;t afford security surprises. We built our security
-              posture to meet the requirements of financial services and healthcare customers
-              from day one.
+              We share anonymised signals with AI companies — never your name, payment
+              info, or identifying details. Our compliance standards are the same ones
+              banks and healthcare companies operate under.
             </p>
             <a
               href="mailto:security@meridianai.com"

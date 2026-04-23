@@ -1,20 +1,20 @@
 {
     "company": {
-      "name": "Meridian AI",
-      "tagline": "Infrastructure for the next generation of intelligent systems",
-      "founded": 2022,
+      "name": "Venturian AI",
+      "tagline": "Earn weekly with the future of AI.",
+      "founded": 2023,
       "headquarters": "San Francisco, CA",
-      "size": "51-200 employees"
+      "size": "11-50 employees"
     },
     "employees": [
       {
         "id": "emp_001",
-        "name": "Soren Halverson",
-        "title": "Co-Founder & CEO",
+        "name": "Harry Chen",
+        "title": "Founder & CEO",
         "department": "Leadership",
         "location": "San Francisco, CA",
-        "tenure": "3 years",
-        "bio": "Previously led ML infrastructure at Stripe. Obsessed with making AI systems reliable at scale."
+        "tenure": "2 years",
+        "bio": "Built Venturian to help students earn real weekly income while contributing to AI training pipelines. Former student himself — started this because no legitimate option existed."
       },
       {
         "id": "emp_002",

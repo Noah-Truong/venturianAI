@@ -5,9 +5,10 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 
 const links = [
-  { href: "/#features", label: "Product" },
-  { href: "/#team", label: "Team" },
-  { href: "/#security", label: "Security" },
+  { href: "/#how-it-works", label: "How it works" },
+  { href: "/#testimonials", label: "Testimonials" },
+  { href: "/#team", label: "Meet the team" },
+  { href: "/about", label: "About" },
   { href: "/careers", label: "Careers" },
 ];
 
@@ -41,9 +42,9 @@ export function Nav() {
           href="/"
           className="font-mono text-sm font-medium tracking-widest uppercase"
           style={{ color: "var(--ink)" }}
-          aria-label="Meridian AI home"
+          aria-label="Venturian AI home"
         >
-          Meridian
+          Venturian
         </Link>
 
         {/* Desktop nav */}
@@ -66,7 +67,7 @@ export function Nav() {
         {/* Desktop CTA */}
         <div className="hidden md:flex items-center gap-4">
           <Link
-            href="#contact"
+            href="/#signup"
             className="text-sm font-medium px-4 py-2 min-h-[44px] flex items-center transition-colors duration-150"
             style={{ border: "1px solid var(--rule)", color: "var(--ink)" }}
             onMouseEnter={(e) => {
@@ -80,7 +81,7 @@ export function Nav() {
               el.style.color = "var(--ink)";
             }}
           >
-            Request infrastructure access
+            Begin signup
           </Link>
         </div>
 
@@ -119,12 +120,12 @@ export function Nav() {
             ))}
           </ul>
           <Link
-            href="#contact"
+            href="/#signup"
             className="text-sm font-medium px-4 py-3 text-center min-h-[44px] flex items-center justify-center"
             style={{ backgroundColor: "var(--ink)", color: "var(--paper)" }}
             onClick={() => setOpen(false)}
           >
-            Request access
+            Begin signup
           </Link>
         </div>
       )}

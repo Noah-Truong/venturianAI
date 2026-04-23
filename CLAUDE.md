@@ -6,11 +6,13 @@ This file is the single source of truth for all agents working on this project. 
 
 ## Company
 
-- **Name**: Meridian AI
-- **Tagline**: Infrastructure for the next generation of intelligent systems
-- **Mission**: Making AI systems reliable at scale
-- **Voice**: Direct, technical, specific. No hype. No buzzwords.
-- **Audience**: Enterprise technical buyers, ML engineers, infrastructure teams
+- **Name**: Venturian AI
+- **Tagline**: Earn weekly with the future of AI.
+- **Mission**: Give students direct access to recurring weekly income from AI training pipelines
+- **Product**: Students sign up with .edu email and Handshake (5 minutes), get verified (1–3 days), then receive $200–$500 weekly payouts with no ongoing work. Venturian manages the accounts and AI company relationships end-to-end.
+- **Voice**: Direct, specific, no buzzwords. Speak to a skeptical student who wants to know exactly how it works.
+- **Audience**: Students — .edu email required, Handshake integration, anyone who wants passive weekly income during school
+- **NOT**: An enterprise B2B product. Not SaaS. Not developer tools. Not infrastructure for engineers.
 
 See `backendtools.json` for full employee bios and company reviews.
 
@@ -36,23 +38,29 @@ See `backendtools.json` for full employee bios and company reviews.
 
 All color, spacing, and type decisions are made here. Agents do not invent new tokens.
 
-### Colors (Tailwind CSS custom tokens via `@theme`)
+### Colors — dark-first, teal accent (defined in `app/globals.css`)
 
 ```css
---color-canvas:   #09090B   /* page background */
---color-surface:  #18181B   /* cards, panels */
---color-overlay:  #27272A   /* elevated surfaces, modals */
---color-border:   #3F3F46   /* lines, dividers */
---color-text:     #FAFAFA   /* primary text */
---color-muted:    #A1A1AA   /* secondary text, captions */
---color-accent:   #14B8A6   /* teal — primary interactive color */
---color-accent-hi:#2DD4BF   /* teal lighter — hover states */
+--ink:       #FAFAFA   /* primary text */
+--paper:     #09090B   /* page background */
+--surface:   #18181B   /* card / panel background */
+--overlay:   #27272A   /* elevated surfaces, modal backdrops */
+--muted:     #A1A1AA   /* secondary text */
+--dim:       #71717A   /* tertiary text */
+--subdued:   #52525B   /* captions, metadata */
+--accent:    #14B8A6   /* teal — primary interactive color */
+--accent-hi: #2DD4BF   /* teal lighter — hover states */
+--rule:      #3F3F46   /* borders, dividers */
+--code-bg:   #161412   /* terminal / code block background */
+--code-rule: #2A2520   /* terminal border */
 ```
 
 **Rules:**
+- Use CSS variables everywhere — never hardcode hex values
+- Components with event handlers (onMouseEnter/Leave) MUST have `"use client"`
 - Zero purple-to-blue gradients anywhere on the site
 - Zero rgba box-shadow on cards — depth through layout and whitespace only
-- Dark mode is the default; light mode must still pass WCAG AA
+- Card background = `var(--surface)`, hover = `var(--overlay)`, page = `var(--paper)`
 
 ### Spacing Scale (8px base)
 
@@ -208,6 +216,20 @@ All work is checked against `reference.json`. Every item in that file starts `"s
 
 - Each agent owns specific sections/pages — do not duplicate work
 - If you discover a conflict with another agent's output, update this file and resolve before merging
-- All data for employees, reviews, and company info comes from `backendtools.json` — do not hardcode this data elsewhere
+- All data for employees, reviews, and company info comes from `backendtools.json` via `lib/data.ts` — never hardcode this data elsewhere
 - Component variants are defined in shadcn/ui — do not create parallel component systems
 - If you need a design decision not covered here, add it to this file before implementing
+- The `meridian/` subdirectory is a separate scaffold from a previous agent — do not import from it or modify it; it is excluded from the root tsconfig
+- **Do not create a new Next.js app inside the project directory.** The root IS the Next.js app.
+- All interactive components (event handlers, hooks) MUST have `"use client"` at the top of the file
+
+## Current Build Status
+
+Renamed from Meridian AI → Venturian AI on 2026-04-23. Updated with student-focused copy, Handshake/.edu integration, $200–$500 earnings, and 4-step how-it-works from venturian.way-marketing.com.
+
+All pages verified 200 and type-clean as of 2026-04-23:
+- `/` — homepage (Nav → Hero → SocialProof → Features → HowItWorks → Team → Reviews → Security → CTA → Footer)
+- `/about` — company story, full team, values
+- `/careers` — culture reviews, open roles, application form
+- `/security` — certifications, encryption, access control, disclosure
+- `/privacy` — full GDPR/CCPA policy with sticky TOC

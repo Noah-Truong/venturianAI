@@ -4,17 +4,17 @@ import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://meridian.ai"),
+  metadataBase: new URL("https://venturian.way-marketing.com"),
   title: {
-    default: "Meridian AI — Infrastructure for Intelligent Systems",
-    template: "%s | Meridian AI",
+    default: "Venturian AI — Earn weekly with the future of AI",
+    template: "%s | Venturian AI",
   },
   description:
-    "Meridian AI builds infrastructure that makes AI systems reliable at scale. Used by engineering teams shipping production ML.",
+    "Venturian AI connects student accounts to AI training pipelines. Sign up with your .edu email in 5 minutes and earn $200–$500 per week.",
   openGraph: {
     type: "website",
     locale: "en_US",
-    siteName: "Meridian AI",
+    siteName: "Venturian AI",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
   twitter: {

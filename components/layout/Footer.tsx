@@ -1,17 +1,17 @@
+"use client";
+
 import Link from "next/link";
 import { company } from "@/lib/data";
 
 const nav = {
-  Product: [
-    { label: "Evaluation", href: "/#features" },
-    { label: "Observability", href: "/#features" },
-    { label: "Deployment", href: "/#features" },
-    { label: "SDK docs", href: "/#features" },
-    { label: "Changelog", href: "#" },
+  Explore: [
+    { label: "How it works", href: "/#how-it-works" },
+    { label: "Testimonials", href: "/#testimonials" },
+    { label: "What you earn", href: "/#features" },
+    { label: "FAQ", href: "/#faq" },
   ],
   Company: [
     { label: "About", href: "/about" },
-    { label: "Team", href: "/#team" },
     { label: "Careers", href: "/careers" },
     { label: "Press", href: "#" },
     { label: "Blog", href: "#" },
@@ -19,14 +19,14 @@ const nav = {
   Legal: [
     { label: "Privacy policy", href: "/privacy" },
     { label: "Terms of service", href: "#" },
-    { label: "Security policy", href: "/#security" },
+    { label: "Security & data", href: "/security" },
     { label: "Cookie settings", href: "#" },
   ],
   Connect: [
-    { label: "GitHub", href: "https://github.com/meridianai" },
-    { label: "Twitter", href: "https://twitter.com/meridianai" },
-    { label: "LinkedIn", href: "https://linkedin.com/company/meridianai" },
-    { label: "hello@meridianai.com", href: "mailto:hello@meridianai.com" },
+    { label: "Twitter", href: "https://twitter.com/venturianai" },
+    { label: "LinkedIn", href: "https://linkedin.com/company/venturianai" },
+    { label: "Instagram", href: "https://instagram.com/venturianai" },
+    { label: "hello@venturianai.com", href: "mailto:hello@venturianai.com" },
   ],
 };
 
@@ -41,20 +41,20 @@ export function Footer() {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-8 mb-16">
           <div>
             <p className="font-mono text-sm font-medium tracking-widest uppercase mb-2" style={{ color: "var(--ink)" }}>
-              Meridian
+              Venturian
             </p>
             <p className="text-xs" style={{ color: "var(--muted)", maxWidth: "36ch" }}>
               {company.tagline}
             </p>
           </div>
           <Link
-            href="#contact"
+            href="/#signup"
             className="inline-flex items-center gap-2 px-5 py-3 text-sm font-medium self-start sm:self-auto transition-colors duration-150 min-h-[44px]"
             style={{ backgroundColor: "var(--ink)", color: "var(--paper)" }}
             onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.backgroundColor = "var(--accent)")}
             onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.backgroundColor = "var(--ink)")}
           >
-            Request infrastructure access <span aria-hidden="true">→</span>
+            Create my account <span aria-hidden="true">→</span>
           </Link>
         </div>
 
@@ -90,10 +90,10 @@ export function Footer() {
           style={{ borderTop: "1px solid var(--rule)" }}
         >
           <p className="font-mono text-[11px]" style={{ color: "var(--muted)" }}>
-            © {year} Meridian AI, Inc. {company.headquarters}
+            © {year} Venturian AI, Inc. {company.headquarters}
           </p>
           <p className="font-mono text-[11px]" style={{ color: "var(--muted)" }}>
-            AI infrastructure · SOC 2 Type II · GDPR ready
+            SOC 2 Type II · GDPR ready · CCPA compliant
           </p>
         </div>
 

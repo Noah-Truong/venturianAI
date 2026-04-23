@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Meridian AI — AI Infrastructure Built for Production</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23B87A14'/><text x='16' y='23' font-family='Georgia,serif' font-size='20' font-weight='700' text-anchor='middle' fill='%23FFFFFF'>M</text></svg>" />
 <meta name="description" content="Meridian gives engineering teams the observability, evaluation, and deployment infrastructure to ship AI models that behave correctly in production — not just in notebooks." />
 <link rel="canonical" href="https://meridian.ai/" />
 <meta property="og:title" content="Meridian AI — AI Infrastructure Built for Production" />
@@ -37,23 +38,14 @@
 
 <style>
   :root {
-    --ink:     #0E0D0B;
-    --paper:   #F4F1EA;
-    --surface: #ECEAE2;
-    --stone:   #8C8780;
-    --amber:   #C2881E;
-    --rule:    #DDD9D0;
+    --ink:     #141210;
+    --paper:   #FFFFFF;
+    --surface: #F5F4F1;
+    --stone:   #9B9791;
+    --amber:   #B87A14;
+    --rule:    #E8E5DF;
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --ink:     #EDE9E0;
-      --paper:   #0E0D0B;
-      --surface: #161510;
-      --stone:   #716D66;
-      --amber:   #D49A2A;
-      --rule:    #252320;
-    }
-  }
+  /* Dark mode intentionally disabled — site is light-only */
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -100,6 +92,16 @@
     border-radius: 2px;
   }
   .skip-link:focus { top: 0.75rem; }
+
+  /* ── Scroll progress bar ───────────────────── */
+  #scroll-bar {
+    position: fixed; top: 0; left: 0; z-index: 200;
+    height: 2px; width: 0%;
+    background: var(--amber);
+    pointer-events: none;
+    transform-origin: left;
+    transition: width 0.08s linear;
+  }
 
   /* ── Layout ────────────────────────────────── */
   .wrap { max-width: 1360px; margin: 0 auto; padding: 0 2rem; }
@@ -175,7 +177,9 @@
   .reveal.d3 { transition-delay: 0.3s; }
 
   /* ── Hero ──────────────────────────────────── */
-  .hero { padding-top: 3.75rem; min-height: 100svh; display: grid; grid-template-rows: 1fr auto; }
+  .hero { padding-top: 3.75rem; min-height: 100svh; display: grid; grid-template-rows: 1fr auto; position: relative; }
+  #hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; display: block; }
+  .hero-content { position: relative; }
   .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; padding: 6rem 0 5rem; }
   @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 0 3rem; } }
   .hero-display-text { font-size: clamp(4.5rem, 11vw, 10.5rem); }
@@ -295,52 +299,54 @@
   .security-card-body { font-size: 0.85rem; line-height: 1.65; color: var(--stone); }
 
   /* ── CTA ───────────────────────────────────── */
-  .cta-section { background: #0E0D0B; padding: 7rem 0; }
+  .cta-section { background: var(--surface); padding: 7rem 0; border-top: 1px solid var(--rule); }
   @media (max-width: 700px) { .cta-section { padding: 4rem 0; } }
   .cta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
   @media (max-width: 900px) { .cta-grid { grid-template-columns: 1fr; gap: 3rem; } }
-  .cta-eyebrow { color: #4a4840; }
-  .cta-heading { font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 700; letter-spacing: -0.025em; line-height: 1.05; color: #EDE9E0; }
-  .cta-body { font-size: 1rem; line-height: 1.7; color: #6b6760; max-width: 44ch; margin-top: 1.25rem; }
+  .cta-eyebrow { color: var(--stone); }
+  .cta-heading { font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 700; letter-spacing: -0.025em; line-height: 1.05; color: var(--ink); }
+  .cta-body { font-size: 1rem; line-height: 1.7; color: var(--stone); max-width: 44ch; margin-top: 1.25rem; }
 
   /* ── Form ──────────────────────────────────── */
   .form-group { margin-bottom: 1rem; }
-  .form-label { display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: #5a5750; margin-bottom: 0.5rem; }
-  .form-input { width: 100%; padding: 0.75rem 1rem; background: #161510; border: 1px solid #2a2820; color: #EDE9E0; font-family: 'DM Sans', sans-serif; font-size: 0.9375rem; font-weight: 300; outline: none; transition: border-color 0.2s; border-radius: 2px; }
-  .form-input::placeholder { color: #3d3b37; }
-  .form-input:hover { border-color: #3d3b37; }
+  .form-label { display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--stone); margin-bottom: 0.5rem; }
+  .form-input { width: 100%; padding: 0.75rem 1rem; background: var(--paper); border: 1px solid var(--rule); color: var(--ink); font-family: 'DM Sans', sans-serif; font-size: 0.9375rem; font-weight: 300; outline: none; transition: border-color 0.2s; border-radius: 2px; }
+  .form-input::placeholder { color: var(--rule); }
+  .form-input:hover { border-color: var(--stone); }
   .form-input:focus { border-color: var(--amber); }
   .form-input:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
-  .form-error { font-size: 0.8rem; color: #d47060; margin-top: 0.375rem; display: none; }
+  .form-error { font-size: 0.8rem; color: #c0503e; margin-top: 0.375rem; display: none; }
   .form-error.show { display: block; }
-  .btn-cta { background: #EDE9E0; color: #0E0D0B; width: 100%; justify-content: center; margin-top: 0.5rem; border-radius: 2px; }
-  .btn-cta:hover { background: var(--amber); color: #0E0D0B; }
+  .btn-cta { background: var(--ink); color: var(--paper); width: 100%; justify-content: center; margin-top: 0.5rem; border-radius: 2px; }
+  .btn-cta:hover { background: var(--amber); color: var(--paper); }
   .btn-cta:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
-  .form-success { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #6fb880; margin-top: 0.875rem; display: none; }
+  .form-success { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #3d8c52; margin-top: 0.875rem; display: none; }
   .form-success.show { display: block; }
 
   /* ── Footer ────────────────────────────────── */
-  .site-footer { background: #0E0D0B; border-top: 1px solid #1a1916; padding: 3.5rem 0; }
+  .site-footer { background: var(--surface); border-top: 1px solid var(--rule); padding: 3.5rem 0; }
   .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
   @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
   @media (max-width: 500px)  { .footer-grid { grid-template-columns: 1fr; gap: 2rem; } }
-  .footer-logo { font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-size: 1.25rem; color: #EDE9E0; text-decoration: none; letter-spacing: -0.02em; display: block; margin-bottom: 0.75rem; }
+  .footer-logo { font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-size: 1.25rem; color: var(--ink); text-decoration: none; letter-spacing: -0.02em; display: block; margin-bottom: 0.75rem; }
   .footer-logo:focus-visible { outline: 2px solid var(--amber); outline-offset: 4px; border-radius: 2px; }
-  .footer-tagline { font-size: 0.85rem; color: #4a4840; line-height: 1.6; max-width: 22ch; }
-  .footer-col-head { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: #4a4840; margin-bottom: 1rem; display: block; }
+  .footer-tagline { font-size: 0.85rem; color: var(--stone); line-height: 1.6; max-width: 22ch; }
+  .footer-col-head { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--stone); margin-bottom: 1rem; display: block; }
   .footer-links { display: flex; flex-direction: column; gap: 0.625rem; }
-  .footer-link { font-size: 0.875rem; color: #6b6760; text-decoration: none; transition: color 0.2s; font-weight: 300; }
-  .footer-link:hover { color: #EDE9E0; }
+  .footer-link { font-size: 0.875rem; color: var(--stone); text-decoration: none; transition: color 0.2s; font-weight: 300; }
+  .footer-link:hover { color: var(--ink); }
   .footer-link:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 2px; }
-  .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; border-top: 1px solid #1a1916; flex-wrap: wrap; gap: 1rem; }
-  .footer-copy { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #4a4840; }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; border-top: 1px solid var(--rule); flex-wrap: wrap; gap: 1rem; }
+  .footer-copy { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--stone); }
   .footer-social { display: flex; gap: 1.5rem; }
-  .footer-social-link { font-size: 0.8rem; color: #4a4840; text-decoration: none; transition: color 0.2s; }
-  .footer-social-link:hover { color: #EDE9E0; }
+  .footer-social-link { font-size: 0.8rem; color: var(--stone); text-decoration: none; transition: color 0.2s; }
+  .footer-social-link:hover { color: var(--ink); }
   .footer-social-link:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 2px; }
 </style>
 </head>
 <body>
+
+<div id="scroll-bar" aria-hidden="true"></div>
 
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
@@ -390,7 +396,8 @@
 
 <!-- ═══ HERO ═══ -->
 <section class="hero" id="hero" aria-labelledby="hero-h1">
-  <div class="wrap">
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <div class="wrap hero-content">
     <div class="hero-grid">
       <div>
         <p class="eyebrow" style="margin-bottom:2rem">
@@ -420,7 +427,7 @@
       </div>
     </div>
   </div>
-  <div class="wrap hero-scroll" aria-hidden="true">
+  <div class="wrap hero-scroll hero-content" aria-hidden="true">
     <span class="scroll-label">SCROLL TO EXPLORE</span>
   </div>
 </section>
@@ -446,19 +453,19 @@
   <div class="wrap">
     <div class="stats-bar">
       <div class="stat-item reveal">
-        <div class="stat-num">99.97%</div>
+        <div class="stat-num" data-count="99.97" data-decimals="2" data-suffix="%">99.97%</div>
         <p class="stat-label">Uptime SLA, enterprise tier</p>
       </div>
       <div class="stat-item reveal d1">
-        <div class="stat-num">12ms</div>
+        <div class="stat-num" data-count="12" data-decimals="0" data-suffix="ms">12ms</div>
         <p class="stat-label">Median eval pipeline latency</p>
       </div>
       <div class="stat-item reveal d2">
-        <div class="stat-num">4.2B</div>
+        <div class="stat-num" data-count="4.2" data-decimals="1" data-suffix="B">4.2B</div>
         <p class="stat-label">Inference events processed monthly</p>
       </div>
       <div class="stat-item reveal d3">
-        <div class="stat-num">&lt;&thinsp;2h</div>
+        <div class="stat-num" data-count="2" data-decimals="0" data-prefix="&lt; " data-suffix="h">&lt;&thinsp;2h</div>
         <p class="stat-label">Mean time to detect model drift</p>
       </div>
     </div>
@@ -880,6 +887,53 @@
   mobLinks.forEach(el => el && el.addEventListener('click', closeNav));
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && mobileNav.classList.contains('open')) closeNav(); });
 
+  // Scroll progress bar
+  const scrollBar = document.getElementById('scroll-bar');
+  function updateScrollBar() {
+    const scrolled = window.scrollY;
+    const total    = document.documentElement.scrollHeight - window.innerHeight;
+    scrollBar.style.width = total > 0 ? (scrolled / total * 100) + '%' : '0%';
+  }
+  window.addEventListener('scroll', updateScrollBar, { passive: true });
+
+  // Stat counters — tick up like a cash register when scrolled into view
+  function animateCounter(el) {
+    const target   = parseFloat(el.dataset.count);
+    const decimals = parseInt(el.dataset.decimals ?? '0');
+    const suffix   = el.dataset.suffix   ?? '';
+    const prefix   = el.dataset.prefix   ?? '';
+    const duration = 1600;
+    const startTs  = performance.now();
+
+    function tick(now) {
+      const t       = Math.min((now - startTs) / duration, 1);
+      const eased   = 1 - Math.pow(1 - t, 4); // ease-out quart — fast then slows like a counter
+      const current = target * eased;
+      el.textContent = prefix + current.toFixed(decimals) + suffix;
+      if (t < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  const counterEls = document.querySelectorAll('.stat-num[data-count]');
+  if (prefersReduced) {
+    counterEls.forEach(el => {
+      const t = parseFloat(el.dataset.count);
+      el.textContent = (el.dataset.prefix ?? '') + t.toFixed(parseInt(el.dataset.decimals ?? '0')) + (el.dataset.suffix ?? '');
+    });
+  }
+  if (!prefersReduced) {
+    const counterObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          animateCounter(e.target);
+          counterObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    counterEls.forEach(el => counterObs.observe(el));
+  }
+
   // Scroll reveal
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const reveals = document.querySelectorAll('.reveal');
@@ -918,6 +972,117 @@
       successMsg.classList.add('show');
     }, 1100);
   });
+</script>
+
+
+<!-- Three.js hero background -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script>
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (typeof THREE === 'undefined') return;
+
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+
+  /* Light palette only */
+  const C = { node: 0xb8b4ac, edge: 0xe0ddd6, pulse: 0xB87A14, nodeOp: 0.60, edgeOp: 0.45 };
+
+  const scene  = new THREE.Scene();
+  const W      = canvas.offsetWidth  || window.innerWidth;
+  const H      = canvas.offsetHeight || window.innerHeight;
+  const camera = new THREE.PerspectiveCamera(52, W / H, 0.1, 100);
+  camera.position.set(0, 0.4, 6.5);
+  camera.lookAt(0, 0, 0);
+
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(W, H);
+  renderer.setClearColor(0x000000, 0);
+
+  /* Nodes in an oblate spheroid — wide and shallow like a distributed network */
+  const NODE_COUNT = 68;
+  const nodeGeo    = new THREE.SphereGeometry(0.052, 7, 7);
+  const group      = new THREE.Group();
+  const nodes      = [];
+
+  for (let i = 0; i < NODE_COUNT; i++) {
+    const theta = Math.random() * Math.PI * 2;
+    const phi   = Math.acos(2 * Math.random() - 1);
+    const r     = 1.6 + Math.random() * 2.6;
+    const x     = r * Math.sin(phi) * Math.cos(theta);
+    const y     = r * Math.sin(phi) * Math.sin(theta) * 0.48;
+    const z     = r * Math.cos(phi);
+    const mat   = new THREE.MeshBasicMaterial({ color: C.node, transparent: true, opacity: C.nodeOp });
+    const mesh  = new THREE.Mesh(nodeGeo, mat);
+    mesh.position.set(x, y, z);
+    nodes.push({ mesh, pos: new THREE.Vector3(x, y, z), pulseEnd: 0 });
+    group.add(mesh);
+  }
+
+  /* Edges between nearby nodes */
+  const THRESHOLD = 1.9;
+  const edgeVerts = [];
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      if (nodes[i].pos.distanceTo(nodes[j].pos) < THRESHOLD) {
+        const a = nodes[i].pos, b = nodes[j].pos;
+        edgeVerts.push(a.x, a.y, a.z, b.x, b.y, b.z);
+      }
+    }
+  }
+  const edgeGeo = new THREE.BufferGeometry();
+  edgeGeo.setAttribute('position', new THREE.Float32BufferAttribute(edgeVerts, 3));
+  group.add(new THREE.LineSegments(edgeGeo,
+    new THREE.LineBasicMaterial({ color: C.edge, transparent: true, opacity: C.edgeOp })));
+
+  scene.add(group);
+
+  /* Animation */
+  const PULSE_COL = new THREE.Color(C.pulse);
+  const BASE_COL  = new THREE.Color(C.node);
+  let lastPulse   = -9999;
+
+  function tick(t) {
+    requestAnimationFrame(tick);
+    group.rotation.y = t * 0.000058;
+    group.rotation.x = Math.sin(t * 0.000022) * 0.10;
+    group.rotation.z = Math.cos(t * 0.000018) * 0.04;
+
+    /* Fire one amber pulse every ~1.6 s to suggest live inference events */
+    if (t - lastPulse > 1600) {
+      const n = nodes[Math.floor(Math.random() * nodes.length)];
+      n.mesh.material.color.copy(PULSE_COL);
+      n.mesh.material.opacity = 0.88;
+      n.mesh.scale.setScalar(1.6);
+      n.pulseEnd = t + 900;
+      lastPulse = t;
+    }
+
+    nodes.forEach(n => {
+      if (n.pulseEnd > 0 && t > n.pulseEnd) {
+        n.mesh.material.color.copy(BASE_COL);
+        n.mesh.material.opacity = C.nodeOp;
+        n.mesh.scale.setScalar(1.0);
+        n.pulseEnd = 0;
+      }
+    });
+
+    renderer.render(scene, camera);
+  }
+
+  requestAnimationFrame(tick);
+
+  /* Resize handler */
+  const ro = new ResizeObserver(() => {
+    const w = canvas.offsetWidth, h = canvas.offsetHeight;
+    if (!w || !h) return;
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h);
+  });
+  ro.observe(canvas);
+}());
 </script>
 
 </body>

@@ -1,0 +1,495 @@
+{
+    "meta": {
+      "benchmark_site": "venturian.way-marketing.com",
+      "benchmark_weaknesses": [
+        "Generic template typography — no distinctive type hierarchy or custom font pairing",
+        "Copy relies on buzzwords ('earn weekly', 'future of AI') without specificity or proof",
+        "No visible performance optimisation — likely unoptimised images and render-blocking resources",
+        "Shallow trust signals — lacks case studies, named customers, or verifiable social proof",
+        "Predictable layout patterns — hero + feature grid + CTA with no spatial personality"
+      ],
+      "audit_goal": "Ensure every dimension of Meridian AI's website measurably exceeds Venturian AI's quality bar across design, performance, copy, accessibility, and trust."
+    },
+    "checks": [
+      {
+        "id": "vd_001",
+        "category": "Visual Design",
+        "name": "Distinctive visual identity system",
+        "description": "The site must have a coherent design system — colour tokens, spacing scale, and component library — that feels purpose-built, not template-derived.",
+        "benchmark_gap": "Venturian uses stock template colours and generic component styling with no identifiable design system.",
+        "priority": "critical",
+        "status": "pending",
+        "acceptance_criteria": "Documented colour palette with ≤5 primary tokens, consistent 8px spacing scale applied site-wide, and no off-brand UI components."
+      },
+      {
+        "id": "vd_002",
+        "category": "Visual Design",
+        "name": "Non-generic hero composition",
+        "description": "The hero section must have a spatial layout that breaks from the centred-headline + subtext + CTA template pattern.",
+        "benchmark_gap": "Venturian's hero is a textbook centred-layout template with no compositional originality.",
+        "priority": "critical",
+        "status": "pending",
+        "acceptance_criteria": "Hero uses asymmetric layout, editorial grid, or a compelling visual device that is not replicable by a generic builder."
+      },
+      {
+        "id": "vd_003",
+        "category": "Visual Design",
+        "name": "Consistent visual rhythm across sections",
+        "description": "Vertical spacing between sections must follow a defined rhythm — no jarring gaps or compressed sections.",
+        "benchmark_gap": "Template sites frequently have inconsistent section padding as sections are stacked without a shared scale.",
+        "priority": "high",
+        "status": "pending",
+        "acceptance_criteria": "All section gaps fall within a 3-step spacing scale (e.g. 64px / 96px / 128px). No section gap deviates by more than 8px from the scale."
+      },
+      {
+        "id": "vd_004",
+        "category": "Visual Design",
+        "name": "No default drop shadows or gradients",
+        "description": "Gratuitous box-shadows and purple-to-blue gradients are hallmarks of generic AI site aesthetics and must be absent.",
+        "benchmark_gap": "Venturian-style sites lean heavily on neon gradients and card shadows to create perceived depth.",
+        "priority": "high",
+        "status": "pending",
+        "acceptance_criteria": "Zero instances of rgba box-shadow on cards, zero purple/blue hero gradients. Depth achieved through layout, whitespace, or typography weight alone."
+      },
+      {
+        "id": "vd_005",
+        "category": "Visual Design",
+        "name": "Mobile layout fidelity",
+        "description": "All sections must reflow gracefully to mobile without text overflow, broken grids, or horizontal scroll.",
+        "benchmark_gap": "Template sites frequently have unoptimised mobile reflows with oversized headings and clipped elements.",
+        "priority": "critical",
+        "status": "pending",
+        "acceptance_criteria": "Zero horizontal overflow at 375px viewport. All tap targets ≥44×44px. No text clipping below 320px width."
+      },
+      {
+        "id": "vd_006",
+        "category": "Visual Design",
+        "name": "Dark mode support",
+        "description": "The site must honour prefers-color-scheme and provide a polished dark variant that isn't just a colour inversion.",
+        "benchmark_gap": "Venturian has no dark mode support.",
+        "priority": "medium",
+        "status": "pending",
+        "acceptance_criteria": "Verified dark mode at OS level on both Chrome and Safari. All text contrast ratios ≥4.5:1 in dark mode."
+      },
+      {
+        "id": "ty_001",
+        "category": "Typography",
+        "name": "Distinctive display typeface",
+        "description": "The primary heading font must be a deliberate, characterful choice — not a default system font or overused SaaS staple.",
+        "benchmark_gap": "Venturian uses Inter or a similar default SaaS font with no typographic personality.",
+        "priority": "critical",
+        "status": "pending",
+        "acceptance_criteria": "Display font is not Inter, Roboto, Arial, or system-ui. Font choice is documented with a rationale in the design system."
+      },
+      {
+        "id": "ty_002",
+        "category": "Typography",
+        "name": "Clear 3-level type hierarchy",
+        "description": "H1, H2, body, and caption must be visually distinct in size, weight, and line-height with no ambiguity.",
+        "benchmark_gap": "Generic templates collapse H2 and H3 into near-identical sizes, flattening the hierarchy.",
+        "priority": "high",
+        "status": "pending",
+        "acceptance_criteria": "Minimum 1.25× size ratio between adjacent heading levels. Body line-height between 1.5–1.75. Caption ≤13px with distinct colour token."
+      },
+      {
+        "id": "ty_003",
+        "category": "Typography",
+        "name": "Controlled line length",
+        "description": "Body copy must stay within the optimal 60–80 character measure to ensure readability.",
+        "benchmark_gap": "Template sites stretch copy full-width on desktop creating unreadable 120+ character lines.",
+        "priority": "high",
+        "status": "pending",
+        "acceptance_criteria": "All body paragraphs have max-width that limits measure to 75ch or less on all viewport widths ≥1024px."
+      },
+      {
+        "id": "ty_004",
+        "category": "Typography",
+        "name": "No orphaned words in headings",
+        "description": "Short orphaned words at the end of heading lines are a polish signal — they must be eliminated.",
+        "benchmark_gap": "Template-generated copy rarely accounts for text reflow and leaves single-word orphans on all viewport sizes.",
+        "priority": "medium",
+        "status": "pending",
+        "acceptance_criteria": "Zero heading orphans at 1440px, 1024px, and 768px viewports. Achieved via copy editing or CSS text-wrap: balance."
+      },
+      {
+        "id": "ty_005",
+        "category": "Typography",
+        "name": "Consistent font weight usage",
+        "description": "No more than 3 font weights used site-wide. Weight must encode meaning (body / emphasis / heading), not decoration.",
+        "benchmark_gap": "Template sites mix weights arbitrarily, using bold mid-sentence to add visual interest rather than semantic weight.",
+        "priority": "medium",
+        "status": "pending",
+        "acceptance_criteria": "Audit confirms ≤3 weight tokens. No mid-paragraph bold that isn't a named entity, label, or genuinely critical term."
+      },
+      {
+        "id": "ty_006",
+        "category": "Typography",
+        "name": "Monospace font for code and technical strings",
+        "description": "Any API keys, code snippets, or technical strings must use a defined monospace face, not the default system mono.",
+        "benchmark_gap": "Generic sites render technical content in body font, signalling low developer credibility.",
+        "priority": "medium",
+        "status": "pending",
+        "acceptance_criteria": "All <code> and technical inline elements use a defined mono font loaded via font-face or CDN."
+      },
+      {
+        "id": "pf_001",
+        "category": "Performance",
+        "name": "LCP under 2.5 seconds",
+        "description": "Largest Contentful Paint must meet Google's 'good' threshold to pass Core Web Vitals.",
+        "benchmark_gap": "Venturian-style marketing pages typically load hero images unoptimised, pushing LCP to 4–6s.",
+        "priority": "critical",
+        "status": "pending",
+        "acceptance_criteria": "Lighthouse LCP ≤2.5s on mobile (simulated 4G throttle). Measured on 3 consecutive runs, median used."
+      },
+      {
+        "id": "pf_002",
+        "category": "Performance",
+        "name": "CLS under 0.1",
+        "description": "Cumulative Layout Shift must stay below the 'good' threshold to prevent jarring visual reflows.",
+        "benchmark_gap": "Template sites load web fonts without font-display:swap or size-adjust, causing large layout shifts.",
+        "priority": "critical",
+        "status": "pending",
+        "acceptance_criteria": "Lighthouse CLS score ≤0.1 on 3 consecutive runs."
+      },
+      {
+        "id": "pf_003",
+        "category": "Performance",
+        "name": "Images in modern formats",
+        "description": "All raster images must be served in WebP or AVIF with appropriate srcset for responsive delivery.",
+        "benchmark_gap": "Template sites default to JPEG/PNG with no format optimisation or responsive image serving.",
+        "priority": "high",
+        "status": "pending",
+        "acceptance_criteria": "Zero PNG/JPEG images in production. All images use <picture> or srcset. Verified via Lighthouse image audit."
+      },
+      {
+        "id": "pf_004",
+        "category": "Performance",
+        "name": "No render-blocking resources",
+        "description": "CSS and JS must not block the critical rendering path. Fonts, scripts, and stylesheets must be loaded non-blocking.",
+        "benchmark_gap": "Template builders frequently inject render-blocking third-party scripts and inline CSS frameworks.",
+        "priority": "high",
+        "status": "pending",
+        "acceptance_criteria": "Zero render-blocking resources flagged by Lighthouse. All third-party scripts deferred or async."
+      },
+      {
+        "id": "pf_005",
+        "category": "Performance",
+        "name": "Total page weight under 1MB",
+        "description": "Uncompressed total transfer size for the landing page must stay lean.",
+        "benchmark_gap": "Marketing template sites frequently exceed 3MB due to unoptimised imagery and loaded-but-unused libraries.",
+        "priority": "high",
+        "status": "pending",
+        "acceptance_criteria": "Chrome DevTools Network panel shows total transfer ≤1MB on initial load with empty cache."
+      },
+      {
+        "id": "pf_006",
+        "category": "Performance",
+        "name": "Fonts subset and self-hosted",
+        "description": "Custom fonts must be subsetted to the character sets in use and served from the same origin to avoid DNS lookup latency.",
+        "benchmark_gap": "Generic sites load full Google Fonts payloads from external CDN, adding 200–400ms to font load time.",
+        "priority": "medium",
+        "status": "pending",
+        "acceptance_criteria": "All fonts served from same origin. Font files subset to Latin character range. WOFF2 format only."
+      },
+      {
+        "id": "cm_001",
+        "category": "Copy & Messaging",
+        "name": "No meaningless AI buzzwords",
+        "description": "Copy must be concrete and specific. Words like 'next-generation', 'cutting-edge', 'harness the power of' are banned.",
+        "benchmark_gap": "Venturian's tagline 'Earn weekly with the future of AI' is entirely buzzword-dependent and says nothing specific.",
+        "priority": "critical",
+        "status": "pending",
+        "acceptance_criteria": "Copy audit returns zero instances of: next-generation, cutting-edge, harness, revolutionise, empower, unlock, leverage (as a verb)."
+      },
+      {
+        "id": "cm_002",
+        "category": "Copy & Messaging",
+        "name": "Hero communicates specific value in one sentence",
+        "description": "A first-time visitor must understand exactly what the product does and who it's for within 5 seconds of arriving.",
+        "benchmark_gap": "Venturian's hero is vague enough to describe any AI company — it communicates no specific differentiation.",
+        "priority": "critical",
+        "status": "pending",
+        "acceptance_criteria": "User test with 5 cold participants: ≥4/5 can correctly describe the product's core function after a 5-second exposure."
+      },
+      {
+        "id": "cm_003",
+        "category": "Copy & Messaging",
+        "name": "Feature copy leads with outcomes, not features",
+        "description": "Feature descriptions must lead with the benefit to the user, not the technical name of the capability.",
+        "benchmark_gap": "Template sites list features by their technical names without translating them to user outcomes.",
+        "priority": "high",
+        "status": "pending",
+        "acceptance_criteria": "All feature cards pass the 'so what?' test. Each card states a measurable or tangible outcome in the first sentence."
+      },
+      {
+        "id": "cm_004",
+        "category": "Copy & Messaging",
+        "name": "CTA copy is specific and action-oriented",
+        "description": "Button copy must describe what happens next, not just 'Get started' or 'Learn more'.",
+        "benchmark_gap": "Venturian uses generic CTA copy ('Get started') that adds no conversion signal or expectation-setting.",
+        "priority": "high",
+        "status": "pending",
+        "acceptance_criteria": "Zero CTA buttons use: 'Get started', 'Learn more', 'Click here', 'Submit'. All CTAs describe the next step."
+      },
+      {
+        "id": "cm_005",
+        "category": "Copy & Messaging",
+        "name": "Pricing copy is honest and complete",
+        "description": "If pricing is shown, all costs must be explicit. No 'starting from' without clarifying what increases the price.",
+        "benchmark_gap": "Typical AI marketing sites hide pricing complexity behind vague tier names and 'contact us' deflection.",
+        "priority": "medium",
+        "status": "pending",
+        "acceptance_criteria": "All pricing tiers list included features, excluded features, and what triggers an upgrade. No asterisked conditions without inline explanation."
+      },
+      {
+        "id": "cm_006",
+        "category": "Copy & Messaging",
+        "name": "Consistent brand voice across all copy",
+        "description": "Tone, sentence length, and vocabulary must be consistent across hero, features, testimonials, and footer.",
+        "benchmark_gap": "Template sites mix formal and casual tones across sections because copy was written in pieces.",
+        "priority": "medium",
+        "status": "pending",
+        "acceptance_criteria": "Brand voice guide exists with ≥3 do/don't examples. Copy audit confirms no section violates documented tone guidelines."
+      },
+      {
+        "id": "im_001",
+        "category": "Interaction & Motion",
+        "name": "Page load animation is cohesive, not scattered",
+        "description": "If animations are used on page load, they must feel like a single choreographed sequence, not independent component animations firing randomly.",
+        "benchmark_gap": "Template sites apply generic fade-in to each section independently, creating an incoherent cascade.",
+        "priority": "high",
+        "status": "pending",
+        "acceptance_criteria": "Page load animation has a documented sequence with stagger timing. All elements enter within a 600ms window from first content paint."
+      },
+      {
+        "id": "im_002",
+        "category": "Interaction & Motion",
+        "name": "Hover states on all interactive elements",
+        "description": "Every button, link, and interactive card must have a visible hover state that communicates affordance.",
+        "benchmark_gap": "Template sites frequently have links and buttons with no visual hover feedback.",
+        "priority": "high",
+        "status": "pending",
+        "acceptance_criteria": "Manual tab-through audit confirms every interactive element has a distinct :hover and :focus-visible state."
+      },
+      {
+        "id": "im_003",
+        "category": "Interaction & Motion",
+        "name": "No motion for motion's sake",
+        "description": "Every animation must serve a purpose: direct attention, show a state change, or communicate a relationship. Decorative-only animations are removed.",
+        "benchmark_gap": "Template sites use floating particles and auto-playing abstract animations that distract without informing.",
+        "priority": "high",
+        "status": "pending",
+        "acceptance_criteria": "Animation audit documents the purpose of every motion effect. All effects with no documented purpose are removed."
+      },
+      {
+        "id": "im_004",
+        "category": "Interaction & Motion",
+        "name": "Reduced motion support",
+        "description": "All animations must be disabled or substantially reduced when prefers-reduced-motion is active.",
+        "benchmark_gap": "Generic template sites ignore prefers-reduced-motion entirely.",
+        "priority": "critical",
+        "status": "pending",
+        "acceptance_criteria": "prefers-reduced-motion: reduce disables all transform and opacity transitions site-wide. Verified in Chrome DevTools emulation."
+      },
+      {
+        "id": "im_005",
+        "category": "Interaction & Motion",
+        "name": "Scroll behaviour is native and smooth",
+        "description": "Anchor link scrolling must use CSS scroll-behavior: smooth, not a JS scroll library that can conflict with OS scroll settings.",
+        "benchmark_gap": "Template builders frequently implement custom JS scroll that overrides native smooth scrolling and breaks reduced-motion.",
+        "priority": "medium",
+        "status": "pending",
+        "acceptance_criteria": "All anchor navigation uses CSS smooth scroll. No scroll-hijacking JS libraries present in the bundle."
+      },
+      {
+        "id": "im_006",
+        "category": "Interaction & Motion",
+        "name": "Form feedback is immediate and clear",
+        "description": "Any form submission must show a visible loading state, success state, and error state within 200ms of the triggering action.",
+        "benchmark_gap": "Template site forms frequently submit with no loading indicator and show vague or absent error messages.",
+        "priority": "high",
+        "status": "pending",
+        "acceptance_criteria": "All form states (loading, success, error) are visually distinct. Error messages identify the specific field and the required fix."
+      },
+      {
+        "id": "ac_001",
+        "category": "Accessibility",
+        "name": "WCAG 2.1 AA colour contrast throughout",
+        "description": "All text must meet 4.5:1 contrast ratio (body) and 3:1 (large text and UI components) against their background.",
+        "benchmark_gap": "Venturian-style sites frequently use light grey text on white backgrounds that fails AA contrast.",
+        "priority": "critical",
+        "status": "pending",
+        "acceptance_criteria": "axe DevTools audit returns zero contrast violations. Manual check on all muted-text and caption-level elements."
+      },
+      {
+        "id": "ac_002",
+        "category": "Accessibility",
+        "name": "Full keyboard navigability",
+        "description": "Every interactive element must be reachable and operable via keyboard alone in a logical tab order.",
+        "benchmark_gap": "Template sites frequently have modals and dropdown menus that trap keyboard focus or have no focus management.",
+        "priority": "critical",
+        "status": "pending",
+        "acceptance_criteria": "Complete site navigation via Tab/Shift+Tab/Enter/Escape with no trapped focus. Tab order matches visual order."
+      },
+      {
+        "id": "ac_003",
+        "category": "Accessibility",
+        "name": "All images have meaningful alt text",
+        "description": "Decorative images must have empty alt attributes. Informational images must have descriptive alt text.",
+        "benchmark_gap": "Template sites frequently leave alt attributes blank or use filename strings as alt text.",
+        "priority": "high",
+        "status": "pending",
+        "acceptance_criteria": "axe audit returns zero missing-alt violations. All decorative images confirmed with alt='' and role='presentation'."
+      },
+      {
+        "id": "ac_004",
+        "category": "Accessibility",
+        "name": "Semantic HTML structure",
+        "description": "Page must use correct heading hierarchy (single H1, logical H2/H3 nesting) and landmark elements (main, nav, footer).",
+        "benchmark_gap": "Template sites frequently use <div> soup with no landmark regions and broken heading hierarchies.",
+        "priority": "high",
+        "status": "pending",
+        "acceptance_criteria": "Single H1 per page. No skipped heading levels. Presence of <main>, <nav>, <footer> landmarks verified via accessibility tree."
+      },
+      {
+        "id": "ac_005",
+        "category": "Accessibility",
+        "name": "Focus visible on all interactive elements",
+        "description": "The default browser focus outline must not be suppressed without providing a custom, clearly visible replacement.",
+        "benchmark_gap": "Template sites commonly apply outline: none globally, removing focus visibility for keyboard users.",
+        "priority": "critical",
+        "status": "pending",
+        "acceptance_criteria": "CSS audit confirms no outline: none or outline: 0 without an accompanying :focus-visible replacement. All focus indicators have 3:1 contrast against adjacent colours."
+      },
+      {
+        "id": "ac_006",
+        "category": "Accessibility",
+        "name": "ARIA used correctly and sparingly",
+        "description": "ARIA roles and attributes must only be used when native HTML semantics are insufficient. Incorrect ARIA is worse than no ARIA.",
+        "benchmark_gap": "Template sites frequently add aria-label to elements that already have visible labels, creating duplicate announcements.",
+        "priority": "medium",
+        "status": "pending",
+        "acceptance_criteria": "ARIA audit confirms no redundant aria-label on labelled form controls. No ARIA roles applied to non-interactive elements."
+      },
+      {
+        "id": "se_001",
+        "category": "SEO & Metadata",
+        "name": "Unique, descriptive title tags on every page",
+        "description": "Each page must have a <title> tag between 50–60 characters that includes the primary keyword and brand name.",
+        "benchmark_gap": "Template sites often use the same title tag across all pages or leave it as the builder default.",
+        "priority": "critical",
+        "status": "pending",
+        "acceptance_criteria": "All pages have unique <title> tags 50–60 chars. No page shares a title with another. Brand name appears in all titles."
+      },
+      {
+        "id": "se_002",
+        "category": "SEO & Metadata",
+        "name": "Meta descriptions for all indexable pages",
+        "description": "Every indexable page must have a unique meta description of 120–160 characters that includes a value proposition and soft CTA.",
+        "benchmark_gap": "Template sites leave meta descriptions blank or auto-generate them from the first paragraph.",
+        "priority": "high",
+        "status": "pending",
+        "acceptance_criteria": "All indexable pages have unique meta descriptions 120–160 chars. No description is a truncated copy of the page H1."
+      },
+      {
+        "id": "se_003",
+        "category": "SEO & Metadata",
+        "name": "Open Graph and Twitter card tags complete",
+        "description": "All social share metadata must be present: og:title, og:description, og:image (1200×630px), og:url, twitter:card.",
+        "benchmark_gap": "Template sites frequently have incomplete OG tags, causing broken or unbranded social previews.",
+        "priority": "high",
+        "status": "pending",
+        "acceptance_criteria": "Social share preview verified in Twitter Card Validator and LinkedIn Post Inspector. Custom og:image present on all key pages."
+      },
+      {
+        "id": "se_004",
+        "category": "SEO & Metadata",
+        "name": "Structured data for organisation",
+        "description": "JSON-LD Organisation schema must be present with name, url, logo, sameAs (social profiles), and contactPoint.",
+        "benchmark_gap": "Venturian-style template sites have no structured data markup of any kind.",
+        "priority": "medium",
+        "status": "pending",
+        "acceptance_criteria": "Google Rich Results Test returns valid Organisation schema with zero errors."
+      },
+      {
+        "id": "se_005",
+        "category": "SEO & Metadata",
+        "name": "Canonical tags on all pages",
+        "description": "Every page must include a self-referencing canonical tag to prevent duplicate content indexing.",
+        "benchmark_gap": "Template sites frequently serve the same content on multiple URLs without canonicalisation.",
+        "priority": "medium",
+        "status": "pending",
+        "acceptance_criteria": "All pages have <link rel='canonical'> pointing to the preferred URL. Verified via Screaming Frog crawl."
+      },
+      {
+        "id": "se_006",
+        "category": "SEO & Metadata",
+        "name": "XML sitemap submitted and valid",
+        "description": "A machine-readable XML sitemap must be present at /sitemap.xml and submitted to Google Search Console.",
+        "benchmark_gap": "Template sites often generate malformed sitemaps or omit them entirely.",
+        "priority": "medium",
+        "status": "pending",
+        "acceptance_criteria": "sitemap.xml validates against the sitemap protocol. All canonical URLs present. Submitted to and confirmed by Google Search Console."
+      },
+      {
+        "id": "tc_001",
+        "category": "Trust & Credibility",
+        "name": "Named customer logos with permission",
+        "description": "Social proof logos must be real, named companies with documented permission to use the logo — not placeholder greyscale shapes.",
+        "benchmark_gap": "Venturian displays no named customer proof. Generic AI landing pages use placeholder logo rows with no verifiable customers.",
+        "priority": "critical",
+        "status": "pending",
+        "acceptance_criteria": "≥4 named customer logos present. Written permission documented for each. Logos link to a case study or testimonial."
+      },
+      {
+        "id": "tc_002",
+        "category": "Trust & Credibility",
+        "name": "Testimonials are attributed and specific",
+        "description": "Every testimonial must include a real full name, job title, company, and a specific outcome or use case — not a vague compliment.",
+        "benchmark_gap": "Template sites use anonymous or first-name-only testimonials with generic praise that could apply to any product.",
+        "priority": "critical",
+        "status": "pending",
+        "acceptance_criteria": "All testimonials have full name, verifiable job title, and company. ≥1 sentence per testimonial references a specific metric or outcome."
+      },
+      {
+        "id": "tc_003",
+        "category": "Trust & Credibility",
+        "name": "Team page with real photos and bios",
+        "description": "Key team members must have professional photos (not AI-generated), real LinkedIn profiles, and bios that establish domain credibility.",
+        "benchmark_gap": "Many AI startup sites have no team page or use stock/AI-generated headshots that erode trust.",
+        "priority": "high",
+        "status": "pending",
+        "acceptance_criteria": "Team page lists ≥5 employees with real photos, linked LinkedIn profiles, and bios ≥40 words establishing relevant experience."
+      },
+      {
+        "id": "tc_004",
+        "category": "Trust & Credibility",
+        "name": "Privacy policy is current and complete",
+        "description": "Privacy policy must cover GDPR/CCPA requirements, be dated within the last 12 months, and be written in plain language.",
+        "benchmark_gap": "Template sites frequently ship with boilerplate privacy policies that don't reflect their actual data practices.",
+        "priority": "critical",
+        "status": "pending",
+        "acceptance_criteria": "Privacy policy covers: data collected, purpose, retention, third-party sharing, user rights, and contact. Reviewed by legal within 12 months."
+      },
+      {
+        "id": "tc_005",
+        "category": "Trust & Credibility",
+        "name": "Security posture is visible",
+        "description": "For a B2B AI company, visible security signals (SOC 2, encryption standards, responsible disclosure) are table stakes.",
+        "benchmark_gap": "Venturian makes no mention of security, compliance, or data handling — a critical gap for enterprise buyers.",
+        "priority": "high",
+        "status": "pending",
+        "acceptance_criteria": "Security page or section present. ≥1 compliance certification mentioned with verification link. Responsible disclosure policy accessible from footer."
+      },
+      {
+        "id": "tc_006",
+        "category": "Trust & Credibility",
+        "name": "Press and media coverage linked",
+        "description": "Credible third-party coverage (TechCrunch, The Information, Bloomberg, etc.) must be linked to, not just logged.",
+        "benchmark_gap": "Template sites list publication logos in a press bar without linking to actual articles.",
+        "priority": "medium",
+        "status": "pending",
+        "acceptance_criteria": "All press logos link to the specific article. Links open in new tab. Articles are ≤18 months old."
+      }
+    ]
+  }

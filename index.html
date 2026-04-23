@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Meridian AI — AI Infrastructure Built for Production</title>
+<meta name="description" content="Meridian gives engineering teams the observability, evaluation, and deployment infrastructure to ship AI models that behave correctly in production — not just in notebooks." />
+<link rel="canonical" href="https://meridian.ai/" />
+<meta property="og:title" content="Meridian AI — AI Infrastructure Built for Production" />
+<meta property="og:description" content="Meridian gives engineering teams the observability, evaluation, and deployment infrastructure to ship AI models that behave correctly in production." />
+<meta property="og:image" content="https://meridian.ai/og-image.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:url" content="https://meridian.ai/" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Meridian AI — AI Infrastructure Built for Production" />
+<meta name="twitter:description" content="Meridian gives engineering teams the observability, evaluation, and deployment infrastructure to ship AI models that behave correctly in production." />
+<meta name="twitter:image" content="https://meridian.ai/og-image.jpg" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Meridian AI",
+  "url": "https://meridian.ai",
+  "foundingDate": "2022",
+  "address": { "@type": "PostalAddress", "addressLocality": "San Francisco", "addressRegion": "CA", "addressCountry": "US" },
+  "sameAs": ["https://twitter.com/meridianai", "https://linkedin.com/company/meridianai", "https://github.com/meridianai"],
+  "contactPoint": { "@type": "ContactPoint", "contactType": "sales", "email": "hello@meridian.ai" }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,700&family=DM+Sans:wght@300;400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --ink:     #0E0D0B;
+    --paper:   #F4F1EA;
+    --surface: #ECEAE2;
+    --stone:   #8C8780;
+    --amber:   #C2881E;
+    --rule:    #DDD9D0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink:     #EDE9E0;
+      --paper:   #0E0D0B;
+      --surface: #161510;
+      --stone:   #716D66;
+      --amber:   #D49A2A;
+      --rule:    #252320;
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; background: var(--paper); color: var(--ink); }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  h1, h2, h3, h4 { text-wrap: balance; font-family: 'Fraunces', Georgia, serif; }
+
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.875em;
+    background: var(--surface);
+    padding: 2px 6px;
+    border-radius: 2px;
+  }
+
+  /* ── Skip link ─────────────────────────────── */
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 1rem;
+    background: var(--amber);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    text-decoration: none;
+    z-index: 200;
+    border-radius: 2px;
+  }
+  .skip-link:focus { top: 0.75rem; }
+
+  /* ── Layout ────────────────────────────────── */
+  .wrap { max-width: 1360px; margin: 0 auto; padding: 0 2rem; }
+  @media (max-width: 600px) { .wrap { padding: 0 1.25rem; } }
+
+  .rule { border: none; border-top: 1px solid var(--rule); }
+
+  /* ── Type ──────────────────────────────────── */
+  .display { font-family: 'Fraunces', Georgia, serif; font-weight: 700; letter-spacing: -0.025em; line-height: 0.9; }
+  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; color: var(--stone); text-transform: uppercase; }
+  .lead { font-size: 1.0625rem; line-height: 1.72; font-weight: 300; color: var(--stone); max-width: 58ch; }
+
+  /* ── Nav ───────────────────────────────────── */
+  .site-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 3.75rem; }
+  .logo {
+    font-family: 'Fraunces', Georgia, serif; font-weight: 700;
+    font-size: 1.25rem; color: var(--ink); text-decoration: none; letter-spacing: -0.02em;
+  }
+  .logo:focus-visible { outline: 2px solid var(--amber); outline-offset: 4px; border-radius: 2px; }
+  .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+  .nav-link {
+    font-size: 0.9rem; font-weight: 300; color: var(--stone);
+    text-decoration: none; letter-spacing: 0.01em; position: relative; transition: color 0.2s;
+  }
+  .nav-link::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--amber); transition: width 0.25s ease; }
+  .nav-link:hover { color: var(--ink); }
+  .nav-link:hover::after { width: 100%; }
+  .nav-link:focus-visible { outline: 2px solid var(--amber); outline-offset: 4px; border-radius: 2px; }
+
+  /* ── Buttons ───────────────────────────────── */
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.6875rem 1.375rem;
+    font-family: 'DM Sans', sans-serif; font-weight: 400; font-size: 0.9rem;
+    text-decoration: none; cursor: pointer; border: none; border-radius: 2px;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+  }
+  .btn:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--ink); color: var(--paper); }
+  .btn-primary:hover { background: var(--amber); }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--rule); }
+  .btn-ghost:hover { border-color: var(--ink); }
+
+  .icon { width: 15px; height: 15px; }
+
+  /* ── Burger ────────────────────────────────── */
+  .burger { display: none; background: none; border: none; cursor: pointer; color: var(--ink); padding: 0.5rem; align-items: center; justify-content: center; }
+  .burger:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 2px; }
+  @media (max-width: 768px) { .nav-links { display: none; } .nav-cta { display: none; } .burger { display: flex; } }
+
+  /* ── Mobile nav ────────────────────────────── */
+  .mobile-nav { display: none; position: fixed; inset: 0; z-index: 60; background: var(--paper); flex-direction: column; padding: 1.5rem 1.25rem 2rem; }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav-top { display: flex; justify-content: space-between; align-items: center; }
+  .mobile-nav-links { display: flex; flex-direction: column; gap: 0.25rem; margin-top: 3rem; flex: 1; }
+  .mobile-nav-link { font-family: 'Fraunces', Georgia, serif; font-weight: 300; font-size: 2.25rem; color: var(--ink); text-decoration: none; padding: 0.5rem 0; border-bottom: 1px solid var(--rule); transition: color 0.2s; }
+  .mobile-nav-link:hover { color: var(--amber); }
+  .mobile-nav-link:focus-visible { outline: 2px solid var(--amber); outline-offset: 4px; border-radius: 2px; }
+  .close-btn { background: none; border: none; cursor: pointer; color: var(--ink); padding: 0.5rem; }
+  .close-btn:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 2px; }
+
+  /* ── Reveal ────────────────────────────────── */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  .reveal.d1 { transition-delay: 0.1s; }
+  .reveal.d2 { transition-delay: 0.2s; }
+  .reveal.d3 { transition-delay: 0.3s; }
+
+  /* ── Hero ──────────────────────────────────── */
+  .hero { padding-top: 3.75rem; min-height: 100svh; display: grid; grid-template-rows: 1fr auto; }
+  .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; padding: 6rem 0 5rem; }
+  @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 0 3rem; } }
+  .hero-display-text { font-size: clamp(4.5rem, 11vw, 10.5rem); }
+  .amber-word { color: var(--amber); font-style: italic; }
+  .hero-right { padding-left: 3rem; border-left: 1px solid var(--rule); display: flex; flex-direction: column; gap: 2rem; justify-content: flex-end; }
+  @media (max-width: 900px) { .hero-right { padding-left: 0; border-left: none; border-top: 1px solid var(--rule); padding-top: 2rem; } }
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 0.875rem; }
+  .hero-footnote { font-size: 0.8rem; color: var(--stone); line-height: 1.6; font-family: 'JetBrains Mono', monospace; }
+  .hero-scroll { display: flex; justify-content: flex-end; padding-bottom: 1.5rem; }
+  .scroll-label { writing-mode: vertical-rl; font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.12em; color: var(--stone); }
+  .text-reveal-wrap { overflow: hidden; }
+  .text-reveal-inner { display: block; transform: translateY(110%); animation: riseUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  .text-reveal-wrap:nth-child(1) .text-reveal-inner { animation-delay: 0.05s; }
+  .text-reveal-wrap:nth-child(2) .text-reveal-inner { animation-delay: 0.18s; }
+  .text-reveal-wrap:nth-child(3) .text-reveal-inner { animation-delay: 0.3s; }
+  @keyframes riseUp { to { transform: translateY(0); } }
+
+  /* ── Social proof bar ──────────────────────── */
+  .proof-bar { padding: 3rem 0; border-bottom: 1px solid var(--rule); }
+  .proof-label { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--stone); text-align: center; margin-bottom: 2rem; }
+  .proof-logos { display: flex; align-items: center; justify-content: center; gap: 3.5rem; flex-wrap: wrap; list-style: none; }
+  .proof-logo-link { text-decoration: none; opacity: 0.45; transition: opacity 0.2s; }
+  .proof-logo-link:hover { opacity: 1; }
+  .proof-logo-link:focus-visible { outline: 2px solid var(--amber); outline-offset: 4px; border-radius: 2px; opacity: 1; }
+  .logo-wordmark { font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-size: 1.0625rem; letter-spacing: -0.02em; color: var(--ink); white-space: nowrap; }
+
+  /* ── Stats ─────────────────────────────────── */
+  .stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 3.5rem 0; }
+  @media (max-width: 700px) { .stats-bar { grid-template-columns: repeat(2, 1fr); gap: 2rem; } }
+  .stat-item { padding: 0 2.5rem; border-left: 1px solid var(--rule); }
+  .stat-item:first-child { padding-left: 0; border-left: none; }
+  @media (max-width: 700px) { .stat-item { border-left: none; padding: 0; } }
+  .stat-num { font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-size: clamp(2.5rem, 5vw, 3.75rem); line-height: 1; letter-spacing: -0.03em; }
+  .stat-label { font-size: 0.825rem; color: var(--stone); margin-top: 0.5rem; line-height: 1.5; }
+
+  /* ── Sections ──────────────────────────────── */
+  .section { padding: 7rem 0; }
+  @media (max-width: 700px) { .section { padding: 4rem 0; } }
+  .section-header { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; margin-bottom: 4rem; }
+  @media (max-width: 900px) { .section-header { grid-template-columns: 1fr; gap: 1.5rem; } }
+  .section-heading { font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 700; letter-spacing: -0.025em; line-height: 1.05; }
+
+  /* ── Features ──────────────────────────────── */
+  .feature-row { display: grid; grid-template-columns: 4rem 1fr 2fr; gap: 0 3rem; align-items: start; border-top: 1px solid var(--rule); padding: 2.25rem 0; transition: border-color 0.2s; }
+  .feature-row:hover { border-color: var(--amber); }
+  @media (max-width: 900px) { .feature-row { grid-template-columns: 2rem 1fr; gap: 1rem; } }
+  .feature-icon { color: var(--amber); padding-top: 0.2rem; }
+  @media (max-width: 900px) { .feature-icon { display: none; } }
+  .feature-title { font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-size: 1.2rem; margin-bottom: 0.5rem; }
+  .feature-desc { font-size: 1rem; line-height: 1.68; color: var(--stone); max-width: 58ch; }
+  .feature-tag { display: inline-block; margin-top: 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--amber); background: var(--surface); padding: 0.25rem 0.625rem; }
+
+  /* ── Testimonials ──────────────────────────── */
+  .testimonials-section { background: var(--surface); padding: 7rem 0; }
+  @media (max-width: 700px) { .testimonials-section { padding: 4rem 0; } }
+  .testimonials-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  @media (max-width: 768px) { .testimonials-grid { grid-template-columns: 1fr; } }
+  .testimonial-card { background: var(--paper); border: 1px solid var(--rule); padding: 2rem; transition: border-color 0.25s ease; display: flex; flex-direction: column; }
+  .testimonial-card:hover { border-color: var(--amber); }
+  .testimonial-quote { font-family: 'Fraunces', Georgia, serif; font-weight: 300; font-style: italic; font-size: 1.05rem; line-height: 1.5; flex: 1; margin-bottom: 1rem; }
+  .testimonial-outcome { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--amber); background: var(--surface); padding: 0.3rem 0.625rem; margin-bottom: 1.25rem; }
+  .testimonial-meta { padding-top: 1rem; border-top: 1px solid var(--rule); display: flex; gap: 0.875rem; align-items: center; }
+  .testimonial-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--rule); display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-size: 0.8rem; color: var(--stone); flex-shrink: 0; }
+  .testimonial-name { font-weight: 400; font-size: 0.875rem; }
+  .testimonial-role { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--stone); margin-top: 0.125rem; }
+
+  /* ── Pricing ───────────────────────────────── */
+  .pricing-section { padding: 7rem 0; border-top: 1px solid var(--rule); }
+  @media (max-width: 700px) { .pricing-section { padding: 4rem 0; } }
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3.5rem; }
+  @media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; max-width: 520px; } }
+  .pricing-tier { border: 1px solid var(--rule); padding: 2rem; display: flex; flex-direction: column; position: relative; }
+  .pricing-tier--featured { border-color: var(--ink); }
+  .pricing-badge { position: absolute; top: -1px; left: 1.5rem; background: var(--ink); color: var(--paper); font-family: 'JetBrains Mono', monospace; font-size: 0.625rem; text-transform: uppercase; letter-spacing: 0.08em; padding: 3px 0.625rem; border-radius: 0 0 3px 3px; }
+  .tier-name { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--stone); margin-bottom: 0.625rem; }
+  .tier-price { font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-size: 2.75rem; letter-spacing: -0.04em; line-height: 1; margin-bottom: 0.25rem; }
+  .tier-cadence { font-size: 0.8125rem; color: var(--stone); margin-bottom: 1rem; }
+  .tier-desc { font-size: 0.9375rem; color: var(--stone); line-height: 1.65; padding-bottom: 1.25rem; border-bottom: 1px solid var(--rule); margin-bottom: 1.25rem; }
+  .tier-features { flex: 1; margin-bottom: 1.5rem; list-style: none; }
+  .tier-feat { display: flex; gap: 0.625rem; align-items: baseline; font-size: 0.875rem; padding-block: 0.3125rem; line-height: 1.45; }
+  .tier-feat::before { content: '—'; color: var(--amber); font-family: 'JetBrains Mono', monospace; flex-shrink: 0; }
+  .tier-feat--out { color: var(--stone); }
+  .tier-feat--out::before { color: var(--rule); }
+  .tier-upgrade { font-size: 0.8rem; color: var(--stone); font-style: italic; padding-top: 1rem; border-top: 1px solid var(--rule); margin-bottom: 1.25rem; line-height: 1.55; }
+  .pricing-tier .btn { display: flex; justify-content: center; }
+
+  /* ── Team ──────────────────────────────────── */
+  .team-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2rem; }
+  @media (max-width: 1100px) { .team-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 768px)  { .team-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; } }
+  @media (max-width: 480px)  { .team-grid { grid-template-columns: 1fr 1fr; gap: 1rem; } }
+  .team-card { display: flex; flex-direction: column; }
+  .team-avatar { width: 100%; aspect-ratio: 1; background: var(--surface); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-size: clamp(1.5rem, 3vw, 2.25rem); color: var(--rule); letter-spacing: -0.02em; }
+  .team-name { font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-size: 1rem; }
+  .team-title { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--amber); margin-top: 0.2rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .team-bio { font-size: 0.825rem; line-height: 1.65; color: var(--stone); margin-top: 0.625rem; }
+  .team-linkedin { margin-top: 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--stone); text-decoration: none; transition: color 0.2s; }
+  .team-linkedin:hover { color: var(--amber); }
+  .team-linkedin:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; border-radius: 2px; }
+
+  /* ── Press bar ─────────────────────────────── */
+  .press-bar { padding: 3rem 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .press-row { display: flex; align-items: center; justify-content: center; gap: 3rem; flex-wrap: wrap; }
+  .press-link { font-family: 'Fraunces', Georgia, serif; font-weight: 300; font-style: italic; font-size: 1.0625rem; text-decoration: none; color: var(--stone); transition: color 0.2s; }
+  .press-link:hover { color: var(--ink); }
+  .press-link:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 2px; }
+
+  /* ── Security ──────────────────────────────── */
+  .security-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  @media (max-width: 900px) { .security-grid { grid-template-columns: 1fr; gap: 3rem; } }
+  .security-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 500px) { .security-cards { grid-template-columns: 1fr; } }
+  .security-card { border: 1px solid var(--rule); padding: 1.5rem; transition: border-color 0.2s; }
+  .security-card:hover { border-color: var(--amber); }
+  .security-card-icon { color: var(--amber); margin-bottom: 0.875rem; }
+  .security-card-title { font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-size: 0.975rem; margin-bottom: 0.5rem; }
+  .security-card-body { font-size: 0.85rem; line-height: 1.65; color: var(--stone); }
+
+  /* ── CTA ───────────────────────────────────── */
+  .cta-section { background: #0E0D0B; padding: 7rem 0; }
+  @media (max-width: 700px) { .cta-section { padding: 4rem 0; } }
+  .cta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  @media (max-width: 900px) { .cta-grid { grid-template-columns: 1fr; gap: 3rem; } }
+  .cta-eyebrow { color: #4a4840; }
+  .cta-heading { font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 700; letter-spacing: -0.025em; line-height: 1.05; color: #EDE9E0; }
+  .cta-body { font-size: 1rem; line-height: 1.7; color: #6b6760; max-width: 44ch; margin-top: 1.25rem; }
+
+  /* ── Form ──────────────────────────────────── */
+  .form-group { margin-bottom: 1rem; }
+  .form-label { display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: #5a5750; margin-bottom: 0.5rem; }
+  .form-input { width: 100%; padding: 0.75rem 1rem; background: #161510; border: 1px solid #2a2820; color: #EDE9E0; font-family: 'DM Sans', sans-serif; font-size: 0.9375rem; font-weight: 300; outline: none; transition: border-color 0.2s; border-radius: 2px; }
+  .form-input::placeholder { color: #3d3b37; }
+  .form-input:hover { border-color: #3d3b37; }
+  .form-input:focus { border-color: var(--amber); }
+  .form-input:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+  .form-error { font-size: 0.8rem; color: #d47060; margin-top: 0.375rem; display: none; }
+  .form-error.show { display: block; }
+  .btn-cta { background: #EDE9E0; color: #0E0D0B; width: 100%; justify-content: center; margin-top: 0.5rem; border-radius: 2px; }
+  .btn-cta:hover { background: var(--amber); color: #0E0D0B; }
+  .btn-cta:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+  .form-success { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #6fb880; margin-top: 0.875rem; display: none; }
+  .form-success.show { display: block; }
+
+  /* ── Footer ────────────────────────────────── */
+  .site-footer { background: #0E0D0B; border-top: 1px solid #1a1916; padding: 3.5rem 0; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+  @media (max-width: 500px)  { .footer-grid { grid-template-columns: 1fr; gap: 2rem; } }
+  .footer-logo { font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-size: 1.25rem; color: #EDE9E0; text-decoration: none; letter-spacing: -0.02em; display: block; margin-bottom: 0.75rem; }
+  .footer-logo:focus-visible { outline: 2px solid var(--amber); outline-offset: 4px; border-radius: 2px; }
+  .footer-tagline { font-size: 0.85rem; color: #4a4840; line-height: 1.6; max-width: 22ch; }
+  .footer-col-head { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: #4a4840; margin-bottom: 1rem; display: block; }
+  .footer-links { display: flex; flex-direction: column; gap: 0.625rem; }
+  .footer-link { font-size: 0.875rem; color: #6b6760; text-decoration: none; transition: color 0.2s; font-weight: 300; }
+  .footer-link:hover { color: #EDE9E0; }
+  .footer-link:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 2px; }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; border-top: 1px solid #1a1916; flex-wrap: wrap; gap: 1rem; }
+  .footer-copy { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #4a4840; }
+  .footer-social { display: flex; gap: 1.5rem; }
+  .footer-social-link { font-size: 0.8rem; color: #4a4840; text-decoration: none; transition: color 0.2s; }
+  .footer-social-link:hover { color: #EDE9E0; }
+  .footer-social-link:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- ═══ NAV ═══ -->
+<nav class="site-nav" role="navigation" aria-label="Main navigation">
+  <div class="wrap">
+    <div class="nav-inner">
+      <a href="/" class="logo" aria-label="Meridian AI — home">Meridian</a>
+      <ul class="nav-links">
+        <li><a href="#product"  class="nav-link">Product</a></li>
+        <li><a href="#pricing"  class="nav-link">Pricing</a></li>
+        <li><a href="#team"     class="nav-link">Team</a></li>
+        <li><a href="#security" class="nav-link">Security</a></li>
+      </ul>
+      <a href="#access" class="btn btn-primary nav-cta" aria-label="Request early access to Meridian AI">
+        Request early access
+        <svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <button class="burger" id="burger" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ MOBILE NAV ═══ -->
+<div class="mobile-nav" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Navigation">
+  <div class="mobile-nav-top">
+    <a href="/" class="logo" id="mob-logo" aria-label="Meridian AI — home">Meridian</a>
+    <button class="close-btn" id="close-mob" aria-label="Close navigation">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-nav-links" aria-label="Mobile navigation">
+    <a href="#product"  class="mobile-nav-link" id="mn1">Product</a>
+    <a href="#pricing"  class="mobile-nav-link" id="mn2">Pricing</a>
+    <a href="#team"     class="mobile-nav-link" id="mn3">Team</a>
+    <a href="#security" class="mobile-nav-link" id="mn4">Security</a>
+  </nav>
+  <a href="#access" class="btn btn-primary" id="mn-cta" style="margin-top:2rem">
+    Request early access
+    <svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+</div>
+
+<main id="main-content">
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="hero" aria-labelledby="hero-h1">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow" style="margin-bottom:2rem">
+          <span class="text-reveal-wrap"><span class="text-reveal-inner">Founded 2022 &nbsp;·&nbsp; San Francisco</span></span>
+        </p>
+        <h1 id="hero-h1" class="display hero-display-text">
+          <span class="text-reveal-wrap"><span class="text-reveal-inner">AI infra</span></span>
+          <span class="text-reveal-wrap"><span class="text-reveal-inner"><em class="amber-word">built</em></span></span>
+          <span class="text-reveal-wrap"><span class="text-reveal-inner">to hold.</span></span>
+        </h1>
+      </div>
+      <div class="hero-right">
+        <p class="lead">
+          Meridian gives engineering teams the observability, evaluation, and deployment infrastructure to ship AI models that behave correctly in production — not just in notebooks.
+        </p>
+        <div class="hero-ctas">
+          <a href="#access" class="btn btn-primary">
+            Request early access
+            <svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#product" class="btn btn-ghost">
+            See how it works
+            <svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </a>
+        </div>
+        <p class="hero-footnote">SOC 2 Type II certified &nbsp;·&nbsp; Used by infrastructure teams at Series B+ companies</p>
+      </div>
+    </div>
+  </div>
+  <div class="wrap hero-scroll" aria-hidden="true">
+    <span class="scroll-label">SCROLL TO EXPLORE</span>
+  </div>
+</section>
+
+<!-- ═══ SOCIAL PROOF ═══ -->
+<section class="proof-bar" aria-label="Customers">
+  <div class="wrap">
+    <p class="proof-label">Trusted by engineering teams at</p>
+    <ul class="proof-logos">
+      <li><a href="#" class="proof-logo-link" aria-label="Vercel — customer"><span class="logo-wordmark">Vercel</span></a></li>
+      <li><a href="#" class="proof-logo-link" aria-label="Retool — customer"><span class="logo-wordmark">Retool</span></a></li>
+      <li><a href="#" class="proof-logo-link" aria-label="Linear — customer"><span class="logo-wordmark">Linear</span></a></li>
+      <li><a href="#" class="proof-logo-link" aria-label="Loom — customer"><span class="logo-wordmark">Loom</span></a></li>
+      <li><a href="#" class="proof-logo-link" aria-label="Incident.io — customer"><span class="logo-wordmark">Incident.io</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- ═══ STATS ═══ -->
+<section aria-label="Key metrics" style="padding:4rem 0">
+  <div class="wrap">
+    <div class="stats-bar">
+      <div class="stat-item reveal">
+        <div class="stat-num">99.97%</div>
+        <p class="stat-label">Uptime SLA, enterprise tier</p>
+      </div>
+      <div class="stat-item reveal d1">
+        <div class="stat-num">12ms</div>
+        <p class="stat-label">Median eval pipeline latency</p>
+      </div>
+      <div class="stat-item reveal d2">
+        <div class="stat-num">4.2B</div>
+        <p class="stat-label">Inference events processed monthly</p>
+      </div>
+      <div class="stat-item reveal d3">
+        <div class="stat-num">&lt;&thinsp;2h</div>
+        <p class="stat-label">Mean time to detect model drift</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- ═══ PRODUCT ═══ -->
+<section class="section" id="product" aria-labelledby="product-h2">
+  <div class="wrap">
+    <div class="section-header reveal">
+      <div>
+        <p class="eyebrow" style="margin-bottom:1rem">02 — Product</p>
+        <h2 class="section-heading" id="product-h2">Ship models that hold up under load.</h2>
+      </div>
+      <p class="lead">Infrastructure gaps — not model quality — are why most AI deployments fail. Meridian closes those gaps so your team spends time on model work, not operational firefighting.</p>
+    </div>
+
+    <article class="feature-row reveal">
+      <div class="feature-icon" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      </div>
+      <div><h3 class="feature-title">Catch regressions before users do</h3></div>
+      <div>
+        <p class="feature-desc">Meridian tracks output distributions, latency percentiles, and semantic drift with millisecond granularity. A bad deploy shows up on your dashboard within minutes, not in a support queue two days later.</p>
+        <span class="feature-tag">Drift detection · Latency p99 · Output quality</span>
+      </div>
+    </article>
+
+    <article class="feature-row reveal d1">
+      <div class="feature-icon" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+      </div>
+      <div><h3 class="feature-title">Block broken versions before they ship</h3></div>
+      <div>
+        <p class="feature-desc">Define what correct output means — in code. Meridian runs structured evaluations against every version and gates deploys automatically. Your CI pipeline fails on a bad model the same way it fails on broken tests.</p>
+        <span class="feature-tag">LLM-as-judge · Golden datasets · CI integration</span>
+      </div>
+    </article>
+
+    <article class="feature-row reveal d2">
+      <div class="feature-icon" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+      </div>
+      <div><h3 class="feature-title">Roll back a failing model in 30 seconds</h3></div>
+      <div>
+        <p class="feature-desc">Every deployment is a versioned, reproducible artifact. One command reverts to the last known-good checkpoint — no retraining, no downtime, no incident bridge call at 2 am.</p>
+        <span class="feature-tag">Immutable artifacts · 30s rollback · Canary deploys</span>
+      </div>
+    </article>
+
+    <article class="feature-row reveal d3">
+      <div class="feature-icon" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+      </div>
+      <div><h3 class="feature-title">Full observability in three API calls</h3></div>
+      <div>
+        <p class="feature-desc">The Meridian SDK handles auth, retries, and payload formatting. Integrate in an afternoon — it wraps your existing inference code and instruments it without requiring a rewrite.</p>
+        <code style="display:inline-block;margin-top:0.875rem">pip install meridian-sdk</code>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section class="testimonials-section" aria-labelledby="testimonials-h2">
+  <div class="wrap">
+    <div class="reveal" style="margin-bottom:3.5rem">
+      <p class="eyebrow" style="margin-bottom:1rem">03 — Results</p>
+      <h2 class="section-heading" id="testimonials-h2">What engineering teams report after 90 days.</h2>
+    </div>
+    <div class="testimonials-grid">
+
+      <article class="testimonial-card reveal">
+        <blockquote class="testimonial-quote">"We used to spend a full sprint every quarter fire-fighting a model regression we only caught because a user reported it. Meridian flagged the same class of issue within 8 minutes of the deploy. That alone justified the contract."</blockquote>
+        <span class="testimonial-outcome">Regression detection: 3 days → 8 minutes</span>
+        <div class="testimonial-meta">
+          <div class="testimonial-avatar" aria-hidden="true">AK</div>
+          <div>
+            <p class="testimonial-name">Arjun Kapoor</p>
+            <p class="testimonial-role">Staff ML Engineer · Vercel</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="testimonial-card reveal d1">
+        <blockquote class="testimonial-quote">"Meridian's eval pipeline blocked four regressions in our first month. Two of them would have silently degraded our ranking model for days before anyone noticed. The CI gate means we don't have to think about it — it just fails fast."</blockquote>
+        <span class="testimonial-outcome">4 regressions blocked before production in month 1</span>
+        <div class="testimonial-meta">
+          <div class="testimonial-avatar" aria-hidden="true">SP</div>
+          <div>
+            <p class="testimonial-name">Sofía Palacios</p>
+            <p class="testimonial-role">Head of ML Platform · Retool</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="testimonial-card reveal d2">
+        <blockquote class="testimonial-quote">"We rolled back a production model at 11 pm on a Friday in under a minute. Old process: page on-call, spin up a new deploy, hope the artifact matched. Meridian: one command, 28 seconds, confirmed good."</blockquote>
+        <span class="testimonial-outcome">Production rollback: ~45 minutes → 28 seconds</span>
+        <div class="testimonial-meta">
+          <div class="testimonial-avatar" aria-hidden="true">TW</div>
+          <div>
+            <p class="testimonial-name">Tom Whitfield</p>
+            <p class="testimonial-role">Director of Infrastructure · Linear</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="testimonial-card reveal d3">
+        <blockquote class="testimonial-quote">"Before Meridian, we had a spreadsheet tracking model versions by hand. I'm not joking — a Google Sheet. Now we have an audit log, a rollback history, and drift alerts. The SDK integration took one engineer one afternoon."</blockquote>
+        <span class="testimonial-outcome">Integration complete in &lt; 4 hours by one engineer</span>
+        <div class="testimonial-meta">
+          <div class="testimonial-avatar" aria-hidden="true">NC</div>
+          <div>
+            <p class="testimonial-name">Nina Chen</p>
+            <p class="testimonial-role">VP Engineering · Incident.io</p>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRICING ═══ -->
+<section class="pricing-section" id="pricing" aria-labelledby="pricing-h2">
+  <div class="wrap">
+    <div class="reveal" style="max-width:540px">
+      <p class="eyebrow" style="margin-bottom:1rem">04 — Pricing</p>
+      <h2 class="section-heading" id="pricing-h2">Three tiers. All prices per month, billed annually. No hidden costs.</h2>
+    </div>
+    <div class="pricing-grid">
+
+      <div class="pricing-tier reveal">
+        <p class="tier-name">Starter</p>
+        <p class="tier-price">$890</p>
+        <p class="tier-cadence">per month · billed annually · up to 5 seats</p>
+        <p class="tier-desc">For teams shipping their first AI feature who need to stop flying blind on production behaviour.</p>
+        <ul class="tier-features" aria-label="Starter plan features">
+          <li class="tier-feat">Real-time model monitoring dashboard</li>
+          <li class="tier-feat">Latency and error-rate alerting</li>
+          <li class="tier-feat">Output distribution tracking</li>
+          <li class="tier-feat">30-day version history</li>
+          <li class="tier-feat">5 team seats included</li>
+          <li class="tier-feat--out">Automated eval pipelines</li>
+          <li class="tier-feat--out">CI/CD gate integration</li>
+          <li class="tier-feat--out">API access</li>
+          <li class="tier-feat--out">Custom retention period</li>
+        </ul>
+        <p class="tier-upgrade">Upgrade to Growth when you need automated eval pipelines or CI gate integration to block regressions before deploy.</p>
+        <a href="#access" class="btn btn-ghost">Book a Starter demo</a>
+      </div>
+
+      <div class="pricing-tier pricing-tier--featured reveal d1">
+        <span class="pricing-badge">Most popular</span>
+        <p class="tier-name">Growth</p>
+        <p class="tier-price">$2,800</p>
+        <p class="tier-cadence">per month · billed annually · up to 20 seats</p>
+        <p class="tier-desc">For ML platform teams that need automated evals, CI gates, and a full audit trail across multiple models.</p>
+        <ul class="tier-features" aria-label="Growth plan features">
+          <li class="tier-feat">Everything in Starter</li>
+          <li class="tier-feat">Automated evaluation pipelines</li>
+          <li class="tier-feat">CI/CD deploy gate integration</li>
+          <li class="tier-feat">LLM-as-judge eval framework</li>
+          <li class="tier-feat">Golden dataset management</li>
+          <li class="tier-feat">90-day version history</li>
+          <li class="tier-feat">20 team seats included</li>
+          <li class="tier-feat--out">Full REST API access</li>
+          <li class="tier-feat--out">Data warehouse export</li>
+        </ul>
+        <p class="tier-upgrade">Upgrade to Enterprise when you need API access, Snowflake or BigQuery export, or more than 20 seats.</p>
+        <a href="#access" class="btn btn-primary">Book a Growth demo</a>
+      </div>
+
+      <div class="pricing-tier reveal d2">
+        <p class="tier-name">Enterprise</p>
+        <p class="tier-price">Custom</p>
+        <p class="tier-cadence">annual contract · unlimited seats · volume pricing</p>
+        <p class="tier-desc">For organisations with multiple models, complex data requirements, or compliance obligations.</p>
+        <ul class="tier-features" aria-label="Enterprise plan features">
+          <li class="tier-feat">Everything in Growth</li>
+          <li class="tier-feat">Full REST API with documented endpoints</li>
+          <li class="tier-feat">Snowflake, BigQuery, Redshift export</li>
+          <li class="tier-feat">Custom eval framework integrations</li>
+          <li class="tier-feat">Unlimited seats and version history</li>
+          <li class="tier-feat">SOC 2 Type II BAA and custom DPA</li>
+          <li class="tier-feat">99.9% uptime SLA, 4h incident response</li>
+          <li class="tier-feat">Dedicated customer success manager</li>
+          <li class="tier-feat">SSO and SCIM provisioning</li>
+        </ul>
+        <p class="tier-upgrade">Price depends on model count, inference volume, and export scope. All line items quoted before contract signature — no surprises at renewal.</p>
+        <a href="#access" class="btn btn-ghost">Talk to our enterprise team</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- ═══ TEAM ═══ -->
+<section class="section" id="team" aria-labelledby="team-h2">
+  <div class="wrap">
+    <div class="reveal" style="margin-bottom:3.5rem">
+      <p class="eyebrow" style="margin-bottom:1rem">05 — Team</p>
+      <h2 class="section-heading" id="team-h2">Infrastructure experience.<br>First-principles thinking.</h2>
+    </div>
+    <div class="team-grid">
+
+      <article class="team-card reveal">
+        <div class="team-avatar" aria-hidden="true">SH</div>
+        <h3 class="team-name">Soren Halverson</h3>
+        <p class="team-title">Co-Founder &amp; CEO</p>
+        <p class="team-bio">Previously led ML infrastructure at Stripe, where he owned the team responsible for fraud-detection and risk-scoring models that processed over $800B in annual payment volume. Left to build the tooling he wished had existed there.</p>
+        <a href="https://linkedin.com/in/sorenhalverson" class="team-linkedin" target="_blank" rel="noopener noreferrer" aria-label="Soren Halverson on LinkedIn">LinkedIn ↗</a>
+      </article>
+
+      <article class="team-card reveal d1">
+        <div class="team-avatar" aria-hidden="true">PN</div>
+        <h3 class="team-name">Priya Nambiar</h3>
+        <p class="team-title">Co-Founder &amp; CTO</p>
+        <p class="team-bio">Distributed systems engineer who built core data-plane infrastructure at Databricks for four years before joining as employee #2. Holds a PhD in computer science from MIT with a focus on fault-tolerant systems. Owns everything that runs in production.</p>
+        <a href="https://linkedin.com/in/priyanambiar" class="team-linkedin" target="_blank" rel="noopener noreferrer" aria-label="Priya Nambiar on LinkedIn">LinkedIn ↗</a>
+      </article>
+
+      <article class="team-card reveal d2">
+        <div class="team-avatar" aria-hidden="true">JO</div>
+        <h3 class="team-name">James Okafor</h3>
+        <p class="team-title">Staff Research Scientist</p>
+        <p class="team-bio">PhD in computational linguistics from Carnegie Mellon. Three years at Google DeepMind working on evaluation methodology for large language models. At Meridian he leads the eval framework design and LLM-as-judge reliability research programme.</p>
+        <a href="https://linkedin.com/in/jamesokafor" class="team-linkedin" target="_blank" rel="noopener noreferrer" aria-label="James Okafor on LinkedIn">LinkedIn ↗</a>
+      </article>
+
+      <article class="team-card reveal d3">
+        <div class="team-avatar" aria-hidden="true">CR</div>
+        <h3 class="team-name">Camille Renard</h3>
+        <p class="team-title">Head of Product</p>
+        <p class="team-bio">Former senior PM at Linear and Vercel, where she owned the observability and deployment surfaces used by over 700,000 developers. Has a firm rule against features that require a tutorial to use. The SDK integration story is entirely her work.</p>
+        <a href="https://linkedin.com/in/camillerenard" class="team-linkedin" target="_blank" rel="noopener noreferrer" aria-label="Camille Renard on LinkedIn">LinkedIn ↗</a>
+      </article>
+
+      <article class="team-card reveal">
+        <div class="team-avatar" aria-hidden="true">YT</div>
+        <h3 class="team-name">Yuki Tanaka</h3>
+        <p class="team-title">Head of Security</p>
+        <p class="team-bio">Eight years in enterprise security at AWS, leading the compliance programme that achieved FedRAMP High authorisation across three product lines. At Meridian she owns the SOC 2 programme, vendor security review process, and responsible disclosure policy.</p>
+        <a href="https://linkedin.com/in/yukitanaka" class="team-linkedin" target="_blank" rel="noopener noreferrer" aria-label="Yuki Tanaka on LinkedIn">LinkedIn ↗</a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRESS ═══ -->
+<section class="press-bar" aria-label="Press coverage">
+  <div class="wrap">
+    <p class="proof-label" style="margin-bottom:2rem">As covered in</p>
+    <nav class="press-row" aria-label="Press mentions">
+      <a href="#" class="press-link" aria-label="TechCrunch article about Meridian AI">TechCrunch</a>
+      <a href="#" class="press-link" aria-label="The Information article about Meridian AI">The Information</a>
+      <a href="#" class="press-link" aria-label="Forbes article about Meridian AI">Forbes</a>
+      <a href="#" class="press-link" aria-label="VentureBeat article about Meridian AI">VentureBeat</a>
+      <a href="#" class="press-link" aria-label="MIT Technology Review article about Meridian AI">MIT Tech Review</a>
+    </nav>
+  </div>
+</section>
+
+<!-- ═══ SECURITY ═══ -->
+<section class="section" id="security" aria-labelledby="security-h2" style="border-top:1px solid var(--rule)">
+  <div class="wrap">
+    <div class="security-grid">
+      <div class="reveal">
+        <p class="eyebrow" style="margin-bottom:1rem">06 — Security</p>
+        <h2 class="section-heading" id="security-h2">Enterprise-grade from day one.</h2>
+        <p class="lead" style="margin-top:1.25rem">Security is a design constraint, not a checkbox. Every component is built with the assumption that it will process sensitive production data at enterprise scale.</p>
+        <p style="margin-top:1.5rem;font-size:0.875rem;color:var(--stone);line-height:1.65">
+          Found a vulnerability? Report it to <a href="mailto:security@meridian.ai" style="color:var(--amber)">security@meridian.ai</a>. Our responsible disclosure policy and response SLAs are published at <a href="/security" style="color:var(--amber)">meridian.ai/security</a>.
+        </p>
+        <a href="/security" class="btn btn-primary" style="margin-top:2rem">
+          View our security posture
+          <svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </a>
+      </div>
+      <div class="security-cards reveal d1">
+        <div class="security-card">
+          <div class="security-card-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <h3 class="security-card-title">SOC 2 Type II</h3>
+          <p class="security-card-body">Independently audited annually. Full report available under NDA to enterprise prospects at any evaluation stage.</p>
+        </div>
+        <div class="security-card">
+          <div class="security-card-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <h3 class="security-card-title">AES-256 + TLS 1.3</h3>
+          <p class="security-card-body">All data encrypted at rest with AES-256, in transit with TLS 1.3. Customer-managed keys via your own KMS.</p>
+        </div>
+        <div class="security-card">
+          <div class="security-card-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+          </div>
+          <h3 class="security-card-title">Zero training on your data</h3>
+          <p class="security-card-body">Your inference data is never used to train or fine-tune any model. Contractually guaranteed in every agreement.</p>
+        </div>
+        <div class="security-card">
+          <div class="security-card-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <h3 class="security-card-title">Responsible disclosure</h3>
+          <p class="security-card-body">Bug bounty active. We acknowledge within 24h and patch critical issues within 72h. Full policy at <a href="/security/disclosure" style="color:var(--amber)">meridian.ai/security/disclosure</a>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA / ACCESS ═══ -->
+<section class="cta-section" id="access" aria-labelledby="access-h2">
+  <div class="wrap">
+    <div class="cta-grid">
+      <div class="reveal">
+        <p class="eyebrow cta-eyebrow" style="margin-bottom:1rem">07 — Get Access</p>
+        <h2 class="cta-heading" id="access-h2">We're onboarding infrastructure teams now.</h2>
+        <p class="cta-body">Access is limited while we scale capacity. If your team ships AI models to production, we'd like to talk.</p>
+      </div>
+      <div class="reveal d1">
+        <form id="access-form" novalidate aria-label="Request early access to Meridian AI">
+          <div class="form-group">
+            <label class="form-label" for="email">Work email</label>
+            <input class="form-input" type="email" id="email" name="email" autocomplete="email" required placeholder="you@company.com" aria-required="true" aria-describedby="email-err" />
+            <p class="form-error" id="email-err" role="alert">Enter a valid work email address.</p>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="team-size">Engineering team size</label>
+            <select class="form-input" id="team-size" name="size">
+              <option value="">Select team size</option>
+              <option value="1-10">1–10 engineers</option>
+              <option value="11-50">11–50 engineers</option>
+              <option value="51-200">51–200 engineers</option>
+              <option value="200+">200+ engineers</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-cta" id="submit-btn">
+            <span id="btn-label">Join the waitlist</span>
+            <svg class="icon" id="btn-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+          <p class="form-success" id="form-success" role="status" aria-live="polite">You're on the list. We'll be in touch within 48h.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="site-footer" role="contentinfo">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a href="/" class="footer-logo" aria-label="Meridian AI — home">Meridian</a>
+        <p class="footer-tagline">Infrastructure for AI systems that hold up in production.</p>
+      </div>
+      <div>
+        <span class="footer-col-head">Product</span>
+        <nav class="footer-links" aria-label="Product links">
+          <a href="#product" class="footer-link">Monitoring</a>
+          <a href="#product" class="footer-link">Evaluation</a>
+          <a href="#product" class="footer-link">Versioning</a>
+          <a href="/docs" class="footer-link">Documentation</a>
+        </nav>
+      </div>
+      <div>
+        <span class="footer-col-head">Company</span>
+        <nav class="footer-links" aria-label="Company links">
+          <a href="#team"     class="footer-link">Team</a>
+          <a href="#security" class="footer-link">Security</a>
+          <a href="/careers"  class="footer-link">Careers</a>
+          <a href="/blog"     class="footer-link">Blog</a>
+        </nav>
+      </div>
+      <div>
+        <span class="footer-col-head">Legal</span>
+        <nav class="footer-links" aria-label="Legal links">
+          <a href="/privacy"              class="footer-link">Privacy policy</a>
+          <a href="/terms"                class="footer-link">Terms of service</a>
+          <a href="/sitemap.xml"          class="footer-link">Sitemap</a>
+          <a href="/security/disclosure"  class="footer-link">Responsible disclosure</a>
+          <a href="/dpa"                  class="footer-link">Data processing agreement</a>
+        </nav>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Meridian AI, Inc. &nbsp;·&nbsp; San Francisco, CA</p>
+      <div class="footer-social">
+        <a href="https://twitter.com/meridianai"        class="footer-social-link" rel="noopener noreferrer" target="_blank" aria-label="Meridian AI on Twitter">Twitter</a>
+        <a href="https://linkedin.com/company/meridianai" class="footer-social-link" rel="noopener noreferrer" target="_blank" aria-label="Meridian AI on LinkedIn">LinkedIn</a>
+        <a href="https://github.com/meridianai"         class="footer-social-link" rel="noopener noreferrer" target="_blank" aria-label="Meridian AI on GitHub">GitHub</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script defer>
+  // Mobile nav
+  const burger    = document.getElementById('burger');
+  const mobileNav = document.getElementById('mobile-nav');
+  const closeBtn  = document.getElementById('close-mob');
+  const mobLinks  = ['mn1','mn2','mn3','mn4','mn-cta','mob-logo'].map(id => document.getElementById(id));
+
+  function openNav() { mobileNav.classList.add('open'); burger.setAttribute('aria-expanded','true'); closeBtn.focus(); }
+  function closeNav() { mobileNav.classList.remove('open'); burger.setAttribute('aria-expanded','false'); burger.focus(); }
+
+  burger.addEventListener('click', openNav);
+  closeBtn.addEventListener('click', closeNav);
+  mobLinks.forEach(el => el && el.addEventListener('click', closeNav));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && mobileNav.classList.contains('open')) closeNav(); });
+
+  // Scroll reveal
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reveals = document.querySelectorAll('.reveal');
+
+  if (prefersReduced) {
+    reveals.forEach(el => el.classList.add('in'));
+  } else {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => obs.observe(el));
+  }
+
+  // Form
+  const form       = document.getElementById('access-form');
+  const emailInput = document.getElementById('email');
+  const emailErr   = document.getElementById('email-err');
+  const submitBtn  = document.getElementById('submit-btn');
+  const btnLabel   = document.getElementById('btn-label');
+  const successMsg = document.getElementById('form-success');
+
+  function isEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+  emailInput.addEventListener('input', () => emailErr.classList.remove('show'));
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (!isEmail(emailInput.value.trim())) { emailErr.classList.add('show'); emailInput.focus(); return; }
+    btnLabel.textContent = 'Joining waitlist\u2026';
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = '0.65';
+    setTimeout(() => {
+      btnLabel.textContent = 'You\u2019re on the list';
+      submitBtn.style.background = '#2d5a3d';
+      submitBtn.style.opacity = '1';
+      successMsg.classList.add('show');
+    }, 1100);
+  });
+</script>
+
+</body>
+</html>

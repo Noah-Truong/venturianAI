@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+/* ── Design Tokens — dark-first, teal accent ───────── */
+:root {
+  --ink:       #FAFAFA;
+  --paper:     #09090B;
+  --surface:   #18181B;
+  --overlay:   #27272A;
+  --muted:     #A1A1AA;
+  --dim:       #71717A;
+  --subdued:   #52525B;
+  --accent:    #14B8A6;
+  --accent-hi: #2DD4BF;
+  --rule:      #3F3F46;
+  --code-bg:   #161412;
+  --code-rule: #2A2520;
+}
+
+/* ── Tailwind Theme ─────────────────────────────────── */
+@theme inline {
+  --color-ink:        var(--ink);
+  --color-paper:      var(--paper);
+  --color-surface:    var(--surface);
+  --color-overlay:    var(--overlay);
+  --color-muted:      var(--muted);
+  --color-dim:        var(--dim);
+  --color-subdued:    var(--subdued);
+  --color-accent:     var(--accent);
+  --color-accent-hi:  var(--accent-hi);
+  --color-rule:       var(--rule);
+  --color-code-bg:    var(--code-bg);
+  --font-sans:        var(--font-geist-sans);
+  --font-mono:        var(--font-geist-mono);
+}
+
+/* ── Base ───────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans, system-ui, sans-serif);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.65;
+}
+
+/* ── Reduced Motion ─────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Focus ──────────────────────────────────────────── */
+*:focus { outline: none; }
+
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── Typography ─────────────────────────────────────── */
+h1, h2, h3, h4 {
+  text-wrap: balance;
+  line-height: 1.15;
+}
+
+p { max-width: 65ch; }
+
+code, pre, kbd, samp {
+  font-family: var(--font-mono, 'Courier New', monospace);
+}

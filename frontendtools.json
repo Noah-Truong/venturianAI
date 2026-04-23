@@ -1,0 +1,121 @@
+{
+    "name": "AI Company Frontend Libraries",
+    "description": "Minimalistic frontend libraries suited for a modern AI company UI",
+    "categories": [
+      {
+        "name": "Styling",
+        "libraries": [
+          {
+            "name": "Tailwind CSS",
+            "npm": "tailwindcss",
+            "tags": ["CSS"],
+            "description": "Utility-first CSS. No opinions about components, total control over every pixel. Ideal as the base layer."
+          },
+          {
+            "name": "clsx + tailwind-merge",
+            "npm": ["clsx", "tailwind-merge"],
+            "tags": ["CSS"],
+            "description": "Conditional class merging without conflicts. Essential when building reusable components on top of Tailwind."
+          },
+          {
+            "name": "Open Props",
+            "npm": "open-props",
+            "tags": ["CSS"],
+            "description": "Curated CSS custom properties. Consistent spacing, type scales, and color tokens in pure CSS, no framework needed."
+          }
+        ]
+      },
+      {
+        "name": "Components",
+        "libraries": [
+          {
+            "name": "Radix UI",
+            "npm": "@radix-ui/react-*",
+            "tags": ["Headless", "React"],
+            "description": "Unstyled, accessible primitives. Dialogs, dropdowns, tooltips — behavior without aesthetic opinions. Bring your own styles."
+          },
+          {
+            "name": "shadcn/ui",
+            "npm": "npx shadcn@latest add",
+            "tags": ["React", "Headless"],
+            "description": "Copy-paste components built on Radix + Tailwind. Owned, not installed — modify freely without fighting a library."
+          },
+          {
+            "name": "Ark UI",
+            "npm": "@ark-ui/react",
+            "tags": ["Headless"],
+            "description": "Headless component primitives from the Chakra team. Framework-agnostic, clean API, less opinionated than Radix."
+          },
+          {
+            "name": "cmdk",
+            "npm": "cmdk",
+            "tags": ["Headless", "React"],
+            "description": "Command menu primitive. The ⌘K modal that users of AI tools expect. Minimal, composable, zero styles."
+          }
+        ]
+      },
+      {
+        "name": "Motion",
+        "libraries": [
+          {
+            "name": "Motion (Framer)",
+            "npm": "motion",
+            "tags": ["Motion", "React"],
+            "description": "The gold standard for React animation. Layout animations, exit transitions, gesture handling — fluid and declarative."
+          },
+          {
+            "name": "AutoAnimate",
+            "npm": "@formkit/auto-animate",
+            "tags": ["Motion"],
+            "description": "One-line list/DOM animations. Add, remove, reorder with automatic transitions. Near-zero setup, works anywhere."
+          }
+        ]
+      },
+      {
+        "name": "Typography & Icons",
+        "libraries": [
+          {
+            "name": "Geist",
+            "npm": "geist",
+            "tags": ["CSS"],
+            "description": "Vercel's typeface. Clean, technical, slightly humanist. Designed for developer-facing products. Sans + Mono included."
+          },
+          {
+            "name": "Lucide",
+            "npm": "lucide-react",
+            "tags": ["Icons"],
+            "description": "Consistent, minimal icon set. 1500+ icons at a single stroke width. Clean SVG, tree-shakeable, active maintenance."
+          },
+          {
+            "name": "Phosphor Icons",
+            "npm": "@phosphor-icons/react",
+            "tags": ["Icons"],
+            "description": "Six weights, 1300+ icons. More expressive than Lucide when you need thin or bold variants for hierarchy."
+          }
+        ]
+      },
+      {
+        "name": "Data & Forms",
+        "libraries": [
+          {
+            "name": "Recharts",
+            "npm": "recharts",
+            "tags": ["Charts", "React"],
+            "description": "Composable charting on D3. Simple API, decent defaults, customizable enough for dashboards without fighting the lib."
+          },
+          {
+            "name": "React Hook Form",
+            "npm": "react-hook-form",
+            "tags": ["Forms", "React"],
+            "description": "Performance-first form state with minimal re-renders. Pairs cleanly with Zod for schema validation."
+          },
+          {
+            "name": "Zod",
+            "npm": "zod",
+            "tags": ["Forms"],
+            "description": "TypeScript-first schema validation. Type inference from schema definitions. Critical when parsing LLM output safely."
+          }
+        ]
+      }
+    ]
+  }

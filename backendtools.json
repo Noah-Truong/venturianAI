@@ -1,0 +1,145 @@
+{
+    "company": {
+      "name": "Meridian AI",
+      "tagline": "Infrastructure for the next generation of intelligent systems",
+      "founded": 2022,
+      "headquarters": "San Francisco, CA",
+      "size": "51-200 employees"
+    },
+    "employees": [
+      {
+        "id": "emp_001",
+        "name": "Soren Halverson",
+        "title": "Co-Founder & CEO",
+        "department": "Leadership",
+        "location": "San Francisco, CA",
+        "tenure": "3 years",
+        "bio": "Previously led ML infrastructure at Stripe. Obsessed with making AI systems reliable at scale."
+      },
+      {
+        "id": "emp_002",
+        "name": "Priya Nambiar",
+        "title": "VP of Engineering",
+        "department": "Engineering",
+        "location": "San Francisco, CA",
+        "tenure": "2 years",
+        "bio": "Distributed systems engineer. Built core infra at Databricks before joining as employee #4."
+      },
+      {
+        "id": "emp_003",
+        "name": "James Okafor",
+        "title": "Staff Research Scientist",
+        "department": "Research",
+        "location": "New York, NY",
+        "tenure": "2 years",
+        "bio": "PhD in computational linguistics from CMU. Focus on evaluation frameworks and model robustness."
+      },
+      {
+        "id": "emp_004",
+        "name": "Camille Renard",
+        "title": "Head of Product",
+        "department": "Product",
+        "location": "San Francisco, CA",
+        "tenure": "1.5 years",
+        "bio": "Former PM at Linear and Vercel. Brings a developer-tools lens to every product decision."
+      },
+      {
+        "id": "emp_005",
+        "name": "Tariq Essawi",
+        "title": "Senior Software Engineer",
+        "department": "Engineering",
+        "location": "Remote — London, UK",
+        "tenure": "1 year",
+        "bio": "Full-stack with a backend lean. Owns the API layer and developer SDK."
+      },
+      {
+        "id": "emp_006",
+        "name": "Yuki Tanaka",
+        "title": "Lead Designer",
+        "department": "Design",
+        "location": "San Francisco, CA",
+        "tenure": "1.5 years",
+        "bio": "Previously at Figma. Believes that design systems are the highest-leverage design work."
+      },
+      {
+        "id": "emp_007",
+        "name": "Amara Diallo",
+        "title": "Research Engineer",
+        "department": "Research",
+        "location": "San Francisco, CA",
+        "tenure": "1 year",
+        "bio": "Masters from Stanford AI Lab. Bridges research and production, turning papers into shipped features."
+      },
+      {
+        "id": "emp_008",
+        "name": "Devon Park",
+        "title": "Enterprise Account Executive",
+        "department": "GTM",
+        "location": "New York, NY",
+        "tenure": "8 months",
+        "bio": "Focused on financial services and healthcare verticals. Loves the consultative, technical sale."
+      }
+    ],
+    "reviews": [
+      {
+        "id": "rev_001",
+        "rating": 5,
+        "title": "One of the best engineering cultures I've been part of",
+        "body": "The bar for quality is genuinely high — code reviews are thorough, documentation is expected, and nobody ships something they'd be embarrassed to explain. It's demanding but the output reflects it.",
+        "role": "Senior Software Engineer",
+        "date": "March 2026",
+        "pros": "Smart colleagues, real technical depth, strong async culture",
+        "cons": "Fast pace can make it hard to go deep on any one problem"
+      },
+      {
+        "id": "rev_002",
+        "rating": 4,
+        "title": "Genuinely mission-driven, not just in the deck",
+        "body": "Leadership talks about responsible AI constantly and backs it up with actual prioritisation decisions, including ones that cost short-term revenue. Refreshing to see that at a startup.",
+        "role": "Research Scientist",
+        "date": "February 2026",
+        "pros": "Clear mission, thoughtful leadership, good research autonomy",
+        "cons": "Tooling for researchers is still catching up to the pace of hiring"
+      },
+      {
+        "id": "rev_003",
+        "rating": 5,
+        "title": "Product team has real influence here",
+        "body": "PMs aren't order-takers. I've pushed back on roadmap items, killed features, and redirected engineering time — and leadership supported it when the reasoning was solid. Rare.",
+        "role": "Product Manager",
+        "date": "January 2026",
+        "pros": "High ownership, collaborative eng team, fast iteration cycles",
+        "cons": "Design resources stretched thin across too many surfaces"
+      },
+      {
+        "id": "rev_004",
+        "rating": 4,
+        "title": "Steep learning curve, then very rewarding",
+        "body": "The first two months are overwhelming — the domain is hard, the codebase is large, and expectations are high. Once you're ramped, the work is genuinely interesting and your contributions matter.",
+        "role": "Software Engineer",
+        "date": "December 2025",
+        "pros": "Interesting problems, good comp, remote-friendly",
+        "cons": "Onboarding process needs more structure for new grads"
+      },
+      {
+        "id": "rev_005",
+        "rating": 3,
+        "title": "Great product, growing pains in operations",
+        "body": "The technical work is excellent and the vision is clear. But as the company scales, some of the operational fundamentals — performance reviews, career ladders, cross-team coordination — haven't kept up.",
+        "role": "Account Executive",
+        "date": "November 2025",
+        "pros": "Strong product to sell, good market timing",
+        "cons": "Sales process and internal tooling feel underinvested"
+      },
+      {
+        "id": "rev_006",
+        "rating": 5,
+        "title": "The design culture punches above its size",
+        "body": "For a 90-person company, the design system maturity and the level of craft expected is more like a 500-person org. Everyone from eng to leadership has a strong visual intuition, which makes collaboration unusually smooth.",
+        "role": "Senior Designer",
+        "date": "October 2025",
+        "pros": "Design is a first-class function, not an afterthought",
+        "cons": "User research capacity is limited given the product surface area"
+      }
+    ]
+  }

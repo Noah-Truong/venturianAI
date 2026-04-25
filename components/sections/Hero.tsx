@@ -1,38 +1,8 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
+import Image from "next/image";
 import Link from "next/link";
-
-const earningsLines = [
-  { type: "header", text: "Venturian · Your earnings" },
-  { type: "divider", text: "─────────────────────────────" },
-  { type: "blank", text: "" },
-  { type: "label", text: "  This week" },
-  { type: "amount", text: "  $172.80" },
-  { type: "blank", text: "" },
-  { type: "source", text: "  ✓  Helix Financial        $14.20" },
-  { type: "source", text: "  ✓  Lattice Labs           $16.40" },
-  { type: "source", text: "  ✓  Ironclad AI            $12.20" },
-  { type: "blank", text: "" },
-  { type: "divider", text: "─────────────────────────────" },
-  { type: "label", text: "  All-time total" },
-  { type: "alltime", text: "  $891.40" },
-  { type: "blank", text: "" },
-  { type: "next", text: "  Next payout: Friday, Apr 25" },
-  { type: "status", text: "  → Direct deposit confirmed" },
-];
-
-const colorMap: Record<string, string> = {
-  header:  "var(--paper)",
-  divider: "var(--code-rule)",
-  blank:   "transparent",
-  label:   "var(--paper)",
-  amount:  "#52B788",
-  source:  "var(--paper)",
-  alltime: "var(--ink)",
-  next:    "var(--paper)",
-  status:  "var(--accent)",
-};
 
 export function Hero() {
   const reduce = useReducedMotion();
@@ -118,7 +88,7 @@ export function Hero() {
           </motion.p>
         </div>
 
-        {/* ── Right column: earnings panel ── */}
+        {/* ── Right column: lifestyle image with earnings overlay ── */}
         <motion.div
           initial={reduce ? {} : { opacity: 0, x: 28 }}
           animate={{ opacity: 1, x: 0 }}
@@ -127,37 +97,43 @@ export function Hero() {
             delay: 0.28,
             ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
           }}
-          className="rounded-sm overflow-hidden"
-          style={{ backgroundColor: "var(--code-bg)", border: "1px solid var(--code-rule)" }}
-          aria-label="Example Venturian earnings dashboard"
+          className="relative rounded-sm overflow-hidden"
+          style={{ aspectRatio: "4/5" }}
+          aria-label="Student earning weekly income with Venturian AI"
         >
-          {/* Panel chrome */}
-          <div
-            className="flex items-center gap-2 px-4 py-3"
-            style={{ borderBottom: "1px solid var(--code-rule)" }}
-          >
-            <span className="w-3 h-3 rounded-full bg-[#FF5F56]" aria-hidden="true" />
-            <span className="w-3 h-3 rounded-full bg-[#FFBD2E]" aria-hidden="true" />
-            <span className="w-3 h-3 rounded-full bg-[#27C93F]" aria-hidden="true" />
-            <span className="ml-3 font-mono text-xs" style={{ color: "#71717A" }}>
-              member dashboard · week of Apr 21
-            </span>
-          </div>
+          <Image
+            src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=840&q=80"
+            alt="Student working on laptop at a coffee shop, earning passive income"
+            fill
+            className="object-cover"
+            priority
+            sizes="(max-width: 1024px) 100vw, 420px"
+          />
 
-          {/* Earnings output */}
-          <div className="p-5 lg:p-6">
-            {earningsLines.map((line, i) => (
-              <motion.div
-                key={i}
-                initial={reduce ? {} : { opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.35 + i * 0.022, duration: 0.15 }}
-                className="font-mono text-xs leading-6"
-                style={{ color: colorMap[line.type] }}
-              >
-                {line.text || " "}
-              </motion.div>
-            ))}
+          {/* Bottom gradient for text readability */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to top, rgba(9,9,11,0.92) 0%, rgba(9,9,11,0.25) 50%, transparent 100%)",
+            }}
+            aria-hidden="true"
+          />
+
+          {/* Earnings overlay */}
+          <div className="absolute bottom-0 left-0 right-0 p-6">
+            <p className="text-xs mb-2" style={{ color: "var(--paper)" }}>
+              week of Apr 21 · direct deposit
+            </p>
+            <p
+              className="text-4xl font-bold mb-1 tabular-nums"
+              style={{ color: "#52B788" }}
+            >
+              $312.00
+            </p>
+            <p className="text-sm" style={{ color: "var(--paper)" }}>
+              → Deposited to account ****4821
+            </p>
           </div>
         </motion.div>
 

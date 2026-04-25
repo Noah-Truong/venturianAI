@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion, useInView } from "motion/react";
 import { useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { HandshakeIcon } from "@/components/ui/handshake-icon";
 
@@ -12,7 +13,8 @@ const steps = [
     title: "Create your Handshake account",
     description:
       "Sign up using your .edu email address and connect your Handshake profile. This takes about a minute. No credit card, no fee, no commitment.",
-    code: `Email:   jordan@university.edu\nPlatform: Handshake\n\n→ Account created. Check your email.`,
+    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80",
+    imageAlt: "Students working on laptops at a university campus",
   },
   {
     number: "02",
@@ -20,7 +22,8 @@ const steps = [
     title: "We verify your profile",
     description:
       "Our team reviews your information to confirm you're an active student. Most verifications complete in under 24 hours. You'll get an email the moment you're confirmed.",
-    code: `Status:   Verification in progress\nSubmitted: Apr 22, 9:41 AM\n\n✓ .edu email confirmed\n✓ Handshake profile reviewed\n→ Email confirmation incoming`,
+    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80",
+    imageAlt: "Person reviewing a verification email on their laptop",
   },
   {
     number: "03",
@@ -28,7 +31,8 @@ const steps = [
     title: "We handle setup and integration",
     description:
       "Your account is connected to our partner AI training pipeline. There's nothing technical required from you — our team handles the entire integration.",
-    code: `Pipeline:  Connected\nPartners:  3 active\nStatus:    Running\n\n→ Setup complete. Earnings active.`,
+    image: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&q=80",
+    imageAlt: "Abstract visualization of AI data pipelines and neural networks",
   },
   {
     number: "04",
@@ -36,7 +40,8 @@ const steps = [
     title: "You receive weekly payments",
     description:
       "Earnings are deposited directly to your account every week. Average students earn $200–$500 per week with zero ongoing work after the initial setup.",
-    code: `✓ Week of Apr 21 — $312.00\n✓ Week of Apr 14 — $287.50\n✓ Week of Apr 07 — $341.80\n\n→ Deposited to account ****4821`,
+    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&q=80",
+    imageAlt: "Hands holding a smartphone showing a payment confirmation screen",
   },
 ];
 
@@ -69,7 +74,7 @@ export function HowItWorks() {
           </h2>
         </motion.div>
 
-        {steps.map(({ number, time, title, description, code }, i) => (
+        {steps.map(({ number, time, title, description, image, imageAlt }, i) => (
           <motion.div
             key={number}
             initial={reduce ? {} : { opacity: 0, y: 20 }}
@@ -121,13 +126,20 @@ export function HowItWorks() {
                 </Link>
               )}
             </div>
+
+            {/* Step image */}
             <div
-              className="rounded-sm p-5"
-              style={{ backgroundColor: "var(--code-bg)", border: "1px solid var(--code-rule)" }}
+              className="relative rounded-sm overflow-hidden"
+              style={{ minHeight: "240px" }}
             >
-              <pre className="font-mono text-xs leading-relaxed whitespace-pre-wrap overflow-x-auto" style={{ color: "#52B788" }}>
-                <code>{code}</code>
-              </pre>
+              <Image
+                src={image}
+                alt={imageAlt}
+                fill
+                className="object-cover"
+                loading={i === 0 ? "eager" : "lazy"}
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
             </div>
           </motion.div>
         ))}
